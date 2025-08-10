@@ -12,16 +12,16 @@
         body {
             font-family: 'Inter', sans-serif;
         }
-        /* Custom brand colors */
-        .bg-earth-blue { background-color: #002347; }
+        /* NEW: Dark theme color palette */
+        .bg-brand-dark { background-color: #111827; } /* gray-900 */
+        .bg-brand-secondary-dark { background-color: #1F2937; } /* gray-800 */
+        .text-brand-dark { color: #111827; }
         .bg-growth-green { background-color: #2E8B57; }
-        .bg-potash-cream { background-color: #F5F5DC; }
-        .text-earth-blue { color: #002347; }
+        .bg-wealth-gold {background-color: #DAA520; }
         .text-growth-green { color: #2E8B57; }
         .text-wealth-gold { color: #DAA520; }
-        .border-growth-green { border-color: #2E8B57; }
         .hover\:bg-growth-green-dark:hover { background-color: #246d45; }
-        .hover\:bg-earth-blue-dark:hover { background-color: #001a33; }
+        .hover\:bg-brand-dark-light:hover { background-color: #374151; } /* gray-700 */
     </style>
 </head>
 <body class="bg-white">
@@ -32,34 +32,32 @@
             <div class="flex justify-between items-center py-4">
                 <div class="flex items-center space-x-2">
                     <!-- Your Logo -->
-                    <img src="images/LogoCocoaPotash.png" alt="Cocoa Potash Logo Icon" class="h-40 w-50">
+                    <a href="index.html" class="flex items-center space-x-2">
+                        <img src="images/LogoCocoaPotash.png" alt="Cocoa Potash Logo" class="h-10 w-auto">
+                    </a> 
                 </div>
                 <div class="hidden md:flex items-center space-x-8">
-                    <a href="#products" class="text-gray-600 hover:text-growth-green font-medium">Our Products</a>
-                    <a href="#impact" class="text-gray-600 hover:text-growth-green font-medium">Our Impact</a>
-                    <a href="#news" class="text-gray-600 hover:text-growth-green font-medium">News</a>
-                    <a href="#about" class="text-gray-600 hover:text-growth-green font-medium">About Us</a>
+                    <a href="index.html#products" class="text-gray-600 hover:text-growth-green font-medium">Our Products</a>
+                    <a href="index.html#impact" class="text-gray-600 hover:text-growth-green font-medium">Our Impact</a>
+                    <a href="news.html" class="text-gray-600 hover:text-growth-green font-medium">News</a>
+                    <a href="about.html" class="text-gray-600 hover:text-growth-green font-medium">About Us</a>
                 </div>
                 <div class="hidden md:block">
                     <a href="#contact" class="bg-growth-green text-white font-bold py-2 px-5 rounded-lg shadow-lg hover:bg-growth-green-dark transition-colors duration-300">
                         Contact Us
                     </a>
                 </div>
-                 <!-- Mobile Menu Button -->
                 <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 hover:text-earth-blue focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                        </svg>
+                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
                     </button>
                 </div>
             </div>
-             <!-- Mobile Menu -->
             <div id="mobile-menu" class="hidden md:hidden pb-4">
-                <a href="#products" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Our Products</a>
-                <a href="#impact" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Our Impact</a>
-                <a href="#news" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">News</a>
-                <a href="#about" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">About Us</a>
+                <a href="index.html#products" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Our Products</a>
+                <a href="index.html#impact" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Our Impact</a>
+                <a href="news.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">News</a>
+                <a href="about.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">About Us</a>
                 <a href="#contact" class="block mt-2 text-center bg-growth-green text-white font-bold py-2 px-5 rounded-lg">Contact Us</a>
             </div>
         </nav>
@@ -67,105 +65,86 @@
 
     <main>
         <!-- Hero Section -->
-        <section class="bg-earth-blue text-white relative">
+        <section class="bg-brand-dark text-white relative">
             <div class="absolute inset-0">
-                <img src="images/CocoaPodHeroImage.jpeg" class="w-full h-full object-cover opacity-10" alt="Abstract background">
+                <img src="images/CocoaPodHeroImage.jpeg" class="w-full h-full object-cover opacity-20" alt="A pile of cocoa pod husks"> 
             </div>
             <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
-                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">
-                    Transforming Agricultural Waste Into Sustainable Wealth
-                </h1>
-                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-300">
-                    We transform high-emissions agricultural waste from cocoa, coconut, and palm-nut into premium organic potash, fertilizer, and renewable energy.
-                </p>
+                <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight">Transforming Agricultural Waste Into Sustainable Wealth</h1>
+                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-300">We transform high-emissions agricultural waste from cocoa, coconut, and palm-nut into premium organic potash, fertilizer, and renewable energy.</p>
                 <div class="mt-8">
-                    <a href="#products" class="inline-block bg-growth-green text-white font-bold py-3 px-10 rounded-lg shadow-xl hover:bg-growth-green-dark transition-transform duration-300 transform hover:scale-105 text-lg">
-                        Discover Our Products
-                    </a>
+                    <a href="#products" class="inline-block bg-growth-green text-white font-bold py-3 px-10 rounded-lg shadow-xl hover:bg-growth-green-dark transition-transform duration-300 transform hover:scale-105 text-lg">Discover Our Products</a>
                 </div>
             </div>
         </section>
 
-        <!-- NEW: Introductory Section -->
+        <!-- Introductory Section -->
         <section class="py-16 md:py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
                     <div class="space-y-6">
-                        <h2 class="text-3xl md:text-4xl font-bold text-earth-blue tracking-tight">Pioneering Africa's Circular Economy</h2>
-                        <p class="text-lg text-gray-700">
-                            At Cocoa Potash, we see opportunity where others see waste. We are a social enterprise born from the rich soils of Ghana, dedicated to solving one of agriculture's biggest challenges. By partnering directly with farming communities, we've developed an innovative process that converts millions of kilograms of raw agricultural waste—a source of pollution and crop disease—into high-value products.
-                        </p>
-                        <p class="text-lg text-gray-700">
-                            This creates a virtuous cycle: farmers gain a new source of income from their waste, our planet benefits from reduced emissions, and industries gain access to sustainable, high-purity materials. It's a model that regenerates the land, empowers people, and redefines the value chain from the ground up.
-                        </p>
+                        <h2 class="text-3xl md:text-4xl font-bold text-brand-dark tracking-tight">Pioneering Africa's Circular Economy</h2>
+                        <p class="text-lg text-gray-700">At Cocoa Potash, we see opportunity where others see waste. We are a social enterprise born from the rich soils of Ghana, dedicated to solving one of agriculture's biggest challenges. By partnering directly with farming communities, we've developed an innovative process that converts millions of kilograms of raw agricultural waste—a source of pollution and crop disease—into high-value products.</p>
+                        <p class="text-lg text-gray-700">This creates a virtuous cycle: farmers gain a new source of income from their waste, our planet benefits from reduced emissions, and industries gain access to sustainable, high-purity materials. It's a model that regenerates the land, empowers people, and redefines the value chain from the ground up.</p>
                         <a href="#impact" class="inline-block text-growth-green font-semibold text-lg hover:underline">See Our Impact in Action &rarr;</a>
                     </div>
-                    <div>
-                        <img src="images/shower gel.png" alt="Cocoa Potash team members collaborating with local farmers" class="rounded-lg shadow-2xl w-full">
+                        <div class="rounded-lg shadow-2xl w-full overflow-hidden">
+                            <iframe 
+                                class="w-full aspect-video"
+                                src="https://www.youtube.com/embed/uFR3ooH5OgE" 
+                                title="Cocoa Potash: Improving lives of cocoa farmers through economic empowerment and skill development" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Products Section -->
-        <section id="products" class="py-16 md:py-24 bg-gray-50">
+        <section id="products" class="py-16 md:py-24 bg-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                     <h2 class="text-3xl md:text-4xl font-bold text-earth-blue tracking-tight">A Portfolio of Sustainable Products</h2>
-                     <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
-                        Each product tells a story of transformation, quality, and positive impact.
-                    </p>
+                     <h2 class="text-3xl md:text-4xl font-bold text-brand-dark tracking-tight">A Portfolio of Sustainable Products</h2>
+                     <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Each product tells a story of transformation, quality, and positive impact.</p>
                 </div>
-
                 <div class="space-y-16">
                     <!-- Product 1: Organic Potash -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                        <div>
-                            <img src="images/Potash MocUp.png" alt="A mound of pure white organic potash powder" class="rounded-lg shadow-2xl h-150 w-220">
+                        <div class="h-96">
+                            <img src="images/Potash MocUp.png" alt="A bag of Organic Potash" class="rounded-lg shadow-2xl w-full h-full object-contain">
                         </div>
                         <div class="space-y-4">
-                            <span class="inline-block bg-earth-blue text-white text-sm font-semibold px-3 py-1 rounded-full">For Industry</span>
-                            <h3 class="text-3xl font-bold text-earth-blue tracking-tight">Organic Potash</h3>
-                            <p class="text-lg text-gray-700">
-                                Our contaminant-free, <strong>96% purity K₂CO₃</strong> is perfect for cosmetics, food, pharmaceuticals, biotech, and advanced manufacturing. Ensures the integrity of your production process while enhancing your brand's ESG story with a fully traceable, ethical supply chain.
-                            </p>
-                            <a href="#" class="inline-block bg-earth-blue text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-earth-blue-dark transition-colors duration-300 text-lg mt-4">
-                                Request Technical Specs
-                            </a>
+                            <span class="inline-block bg-brand-dark text-white text-sm font-semibold px-3 py-1 rounded-full">For Industry</span>
+                            <h3 class="text-3xl font-bold text-brand-dark tracking-tight">Organic Potash</h3>
+                            <p class="text-lg text-gray-700">Our contaminant-free, <strong>96% purity K₂CO₃</strong> is perfect for cosmetics, food, pharmaceuticals, biotech, and advanced manufacturing. Ensures the integrity of your production process while enhancing your brand's ESG story with a fully traceable, ethical supply chain.</p>
+                            <a href="request-sample.html" class="inline-block bg-brand-dark text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-brand-dark-light transition-colors duration-300 text-lg mt-4">Request A Sample</a>
                         </div>
                     </div>
-
                     <!-- Product 2: Organic Fertilizer -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                          <div class="space-y-4 md:order-2">
                             <span class="inline-block bg-growth-green text-white text-sm font-semibold px-3 py-1 rounded-full">For Agriculture</span>
-                            <h3 class="text-3xl font-bold text-earth-blue tracking-tight">Organic Fertilizer</h3>
-                            <p class="text-lg text-gray-700">
-                                Our organic fertilizer is made from local resources to solve local challenges. It enriches your soil, boosts crop yields by up to 50%, and is 29% more affordable than imported chemicals. It's not just fertilizer; it's an investment in the future of your farm.
-                            </p>
-                            <a href="#" class="inline-block bg-growth-green text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-growth-green-dark transition-colors duration-300 text-lg mt-4">
-                                Learn More for Your Farm
-                            </a>
+                            <h3 class="text-3xl font-bold text-brand-dark tracking-tight">Organic Fertilizer</h3>
+                            <p class="text-lg text-gray-700">Our organic fertilizer is made from local resources to solve local challenges. It enriches your soil, boosts crop yields by up to 50%, and is 29% more affordable than imported chemicals. It's not just fertilizer; it's an investment in the future of your farm.</p>
+                            <a href="request-sample.html" class="inline-block bg-growth-green text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-growth-green-dark transition-colors duration-300 text-lg mt-4">Learn More for Your Farm</a>
                         </div>
                         <div class="md:order-1">
                             <img src="images/cocoa potash fertilizer.png" alt="Rich, dark organic fertilizer" class="rounded-lg shadow-2xl w-full">
                         </div>
                     </div>
-
                     <!-- Product 3: African Black Soap -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
                         <div>
                             <img src="images/BlackSoap.png" alt="A bar of authentic African Black Soap" class="rounded-lg shadow-2xl w-full">
                         </div>
                         <div class="space-y-4">
-                             <span class="inline-block bg-wealth-gold text-earth-blue text-sm font-semibold px-3 py-1 rounded-full">For Personal Care</span>
-                            <h3 class="text-3xl font-bold text-earth-blue tracking-tight">African Black Soap</h3>
-                            <p class="text-lg text-gray-700">
-                                Our authentic African Black Soap is crafted with our own sustainably sourced organic potash and natural ingredients. This gentle, chemical-free bar deeply cleanses, nourishes, and clarifies your skin without stripping its natural moisture. It's pure, purposeful skincare that feels good and does good.
-                            </p>
-                             <a href="#" class="inline-block bg-gray-800 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-black transition-colors duration-300 text-lg mt-4">
-                                Shop Skincare
-                            </a>
+                             <span class="inline-block bg-wealth-gold text-brand-dark text-sm font-semibold px-3 py-1 rounded-full">For Personal Care</span>
+                            <h3 class="text-3xl font-bold text-brand-dark tracking-tight">African Black Soap</h3>
+                            <p class="text-lg text-gray-700">Our authentic African Black Soap is crafted with our own sustainably sourced organic potash and natural ingredients. This gentle, chemical-free bar deeply cleanses, nourishes, and clarifies your skin without stripping its natural moisture. It's pure, purposeful skincare that feels good and does good.</p>
+                             <a href="request-sample.html" class="inline-block bg-gray-800 text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-black transition-colors duration-300 text-lg mt-4">Shop Skincare</a>
                         </div>
                     </div>
                 </div>
@@ -173,18 +152,18 @@
         </section>
         
         <!-- Impact Section -->
-        <section id="impact" class="py-16 md:py-24 bg-potash-cream">
+        <section id="impact" class="py-16 md:py-24 bg-brand-secondary-dark text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center">
-                    <h2 class="text-3xl md:text-4xl font-bold text-earth-blue">Our Impact by the Numbers</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-700">We measure our success by the positive change we create for communities and the planet.</p>
+                    <h2 class="text-3xl md:text-4xl font-bold">Our Impact by the Numbers</h2>
+                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-300">We measure our success by the positive change we create for communities and the planet.</p>
                 </div>
                 <div class="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
-                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-green">1,000+</p><p class="mt-1 text-gray-600 font-medium">Farmers Empowered</p></div>
-                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-green">39+</p><p class="mt-1 text-gray-600 font-medium">Communities</p></div>
-                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-green">78,000+</p><p class="mt-1 text-gray-600 font-medium">kg Waste Recycled</p></div>
-                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-green">40%+</p><p class="mt-1 text-gray-600 font-medium">Crop Yield Increase</p></div>
-                    <div class="p-4 col-span-2 md:col-span-1"><p class="text-4xl font-extrabold text-growth-green">1,300+</p><p class="mt-1 text-gray-600 font-medium">Women Impacted</p></div>
+                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-green">1,000+</p><p class="mt-1 text-gray-400 font-medium">Farmers Empowered</p></div>
+                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-green">39+</p><p class="mt-1 text-gray-400 font-medium">Communities</p></div>
+                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-green">78,000+</p><p class="mt-1 text-gray-400 font-medium">kg Waste Recycled</p></div>
+                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-green">40%+</p><p class="mt-1 text-gray-400 font-medium">Crop Yield Increase</p></div>
+                    <div class="p-4 col-span-2 md:col-span-1"><p class="text-4xl font-extrabold text-growth-green">1,300+</p><p class="mt-1 text-gray-400 font-medium">Women Impacted</p></div>
                 </div>
             </div>
         </section>
@@ -193,7 +172,7 @@
         <section id="news" class="py-16 md:py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-earth-blue">In the News</h2>
+                    <h2 class="text-3xl md:text-4xl font-bold text-brand-dark">In the News</h2>
                     <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">See how our mission is making headlines and gaining recognition.</p>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -201,27 +180,27 @@
                     <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
                         <img src="images/MITWFATEAMPIC.jpg" class="w-full h-48 object-cover" alt="MIT Prize">
                         <div class="p-6">
-                            <h3 class="font-bold text-xl text-earth-blue">Cocoa Potash Wins $20,000 at MIT Innovation Prize</h3>
+                            <h3 class="font-bold text-xl text-brand-dark">Cocoa Potash Wins $20,000 at MIT Innovation Prize</h3>
                             <p class="mt-2 text-gray-600">This recognition for our eco-friendly process fuels our mission to drive sustainable farming worldwide.</p>
-                            <a href="#" class="mt-4 inline-block text-growth-green font-semibold hover:underline">Read More &rarr;</a>
+                            <a href="news.html" class="mt-4 inline-block text-growth-green font-semibold hover:underline">Read More &rarr;</a>
                         </div>
                     </div>
                     <!-- News Card 2 -->
                     <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
                         <img src="images/hult-prize-hero.jpeg" class="w-full h-48 object-cover" alt="Hult Prize">
                         <div class="p-6">
-                            <h3 class="font-bold text-xl text-earth-blue">Reflecting on Our Hult Prize Journey</h3>
+                            <h3 class="font-bold text-xl text-brand-dark">Reflecting on Our Hult Prize Journey</h3>
                             <p class="mt-2 text-gray-600">Our time at the Hult Prize Global Incubator sharpened our mission to tackle agricultural waste and empower communities.</p>
-                             <a href="#" class="mt-4 inline-block text-growth-green font-semibold hover:underline">Read More &rarr;</a>
+                             <a href="news.html" class="mt-4 inline-block text-growth-green font-semibold hover:underline">Read More &rarr;</a>
                         </div>
                     </div>
                     <!-- News Card 3 -->
                     <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden">
-                        <img src="https://placehold.co/600x400/2E8B57/FFFFFF?text=Greentown+Labs" class="w-full h-48 object-cover" alt="Greentown Labs">
+                        <img src="images/Cocoa Potash GreenTownLab.heic" class="w-full h-48 object-cover" alt="Greentown Labs">
                         <div class="p-6">
-                            <h3 class="font-bold text-xl text-earth-blue">Cocoa Potash Visits Greentown Labs</h3>
+                            <h3 class="font-bold text-xl text-brand-dark">Cocoa Potash Visits Greentown Labs</h3>
                             <p class="mt-2 text-gray-600">We connected with North America's largest climatetech incubator to explore innovations and scale our solutions.</p>
-                             <a href="#" class="mt-4 inline-block text-growth-green font-semibold hover:underline">Read More &rarr;</a>
+                             <a href="news.html" class="mt-4 inline-block text-growth-green font-semibold hover:underline">Read More &rarr;</a>
                         </div>
                     </div>
                 </div>
@@ -229,39 +208,41 @@
         </section>
 
         <!-- Partners & Supporters Section -->
-        <section class="py-16 bg-potash-cream">
+        <section class="py-16 bg-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-center text-3xl font-bold text-earth-blue">Our Partners & Supporters</h2>
+                <h2 class="text-center text-3xl font-bold text-brand-dark">Our Partners & Supporters</h2>
                 <div class="mt-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-8 items-center">
-                    <img src="https://placehold.co/200x100/FFFFFF/CCCCCC?text=CWRU" alt="Case Western Reserve University Logo" class="grayscale hover:grayscale-0 transition duration-300">
-                    <img src="https://placehold.co/200x100/FFFFFF/CCCCCC?text=Hult+Prize" alt="Hult Prize Logo" class="grayscale hover:grayscale-0 transition duration-300">
-                    <img src="https://placehold.co/200x100/FFFFFF/CCCCCC?text=Greentown+Labs" alt="Greentown Labs Logo" class="grayscale hover:grayscale-0 transition duration-300">
-                    <img src="https://placehold.co/200x100/FFFFFF/CCCCCC?text=KNUST" alt="KNUST Logo" class="grayscale hover:grayscale-0 transition duration-300">
-                    <img src="https://placehold.co/200x100/FFFFFF/CCCCCC?text=United+Way" alt="United Way Logo" class="grayscale hover:grayscale-0 transition duration-300">
-                    <img src="https://placehold.co/200x100/FFFFFF/CCCCCC?text=Cargill" alt="Cargill Logo" class="grayscale hover:grayscale-0 transition duration-300">
+                    <img src="images/Case+Western+Reserve+University+Veale+Institute+logo-1364346897.png" alt="Case Western Reserve University Veale Institute for Entrepreneurship Logo" class="grayscale hover:grayscale-0 transition duration-300">
+                    <img src="images/Hult-Prize-logo-1-1598300507.png" alt="Hult Prize Logo" class="grayscale hover:grayscale-0 transition duration-300">
+                    <img src="images/CCHUB-logo-825881762.png" alt="Greentown Labs Logo" class="grayscale hover:grayscale-0 transition duration-300">
+                    <img src="images/Ghana-Climate-Innovation-Centre-GCIC-3463433498.png" alt="KNUST Logo" class="grayscale hover:grayscale-0 transition duration-300">
+                    <img src="images/KNUST-Logo-Vector.svg--467444582.png" alt="United Way Logo" class="grayscale hover:grayscale-0 transition duration-300">
+                    <img src="images/LogoCocoaPotash.png" alt="Cargill Logo" class="grayscale hover:grayscale-0 transition duration-300">
                 </div>
             </div>
         </section>
 
-        <!-- About Us Section -->
+        <!-- About Us Section Preview -->
         <section id="about" class="py-16 md:py-24 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-earth-blue">Our Team</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-dark">Our Team</h2>
                 <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Meet the passionate leaders driving our mission forward.</p>
                 <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
                     <!-- Team Member -->
-                    <div><img src="https://placehold.co/300x300" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Ibrahim Quagraine"><h3 class="mt-4 font-bold text-lg text-earth-blue">Ibrahim Quagraine</h3><p class="text-growth-green">Chief Executive Officer</p></div>
-                    <div><img src="https://placehold.co/300x300" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Prince Agyei Baffour"><h3 class="mt-4 font-bold text-lg text-earth-blue">Prince Agyei Baffour</h3><p class="text-growth-green">Chief Operations Officer</p></div>
-                    <div><img src="https://placehold.co/300x300" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Ithabeleng Makhetha"><h3 class="mt-4 font-bold text-lg text-earth-blue">Ithabeleng Makhetha</h3><p class="text-growth-green">Chief Client Officer</p></div>
-                    <div><img src="https://placehold.co/300x300" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Thomas Tawiah-Baah"><h3 class="mt-4 font-bold text-lg text-earth-blue">Thomas Tawiah-Baah</h3><p class="text-growth-green">Chief Technology Officer</p></div>
+                    <div><img src="images/IbrahimQuagraine.png" class="rounded-full mx-auto w-32 h-32 shadow-lg object-cover"><h3 class="mt-4 font-bold text-lg text-brand-dark">Ibrahim Quagraine</h3><p class="text-growth-green">Chief Executive Officer</p></div>
+                    <div><img src="images/PrinceHeadShot.png" class="rounded-full mx-auto w-32 h-32 shadow-lg"><h3 class="mt-4 font-bold text-lg text-brand-dark">Prince Agyei Baffour</h3><p class="text-growth-green">Chief Operations Officer</p></div>
+                    <div><img src="images/IthaHeadShot-removebg-preview.png" class="rounded-full mx-auto w-32 h-32 shadow-lg"><h3 class="mt-4 font-bold text-lg text-brand-dark">Ithabeleng Makhetha</h3><p class="text-growth-green">Chief Client Officer</p></div>
+                    <div><img src="images/Thomas.png" class="rounded-full mx-auto w-32 h-32 shadow-lg"><h3 class="mt-4 font-bold text-lg text-brand-dark">Thomas Tawiah-Baah</h3><p class="text-growth-green">Chief Technology Officer</p></div>
+                </div>
+                <div class="mt-12">
+                    <a href="about.html" class="inline-block bg-white text-growth-green font-semibold py-3 px-8 rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors">Meet  Full Team And Our Advisors</a>
                 </div>
             </div>
         </section>
-
     </main>
 
     <!-- Footer -->
-    <footer id="contact" class="bg-earth-blue text-white">
+    <footer id="contact" class="bg-brand-dark text-white">
         <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl font-bold">Get in Touch</h2>
             <p class="mt-4 text-lg text-gray-300">Have a question or want to partner with us? We’d love to hear from you.</p>
@@ -283,6 +264,5 @@
             mobileMenu.classList.toggle('hidden');
         });
     </script>
-
 </body>
 </html>
