@@ -1,145 +1,384 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>News - Cocoa Potash</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .bg-brand-dark { background-color: #111827; }
-        .text-brand-dark { color: #111827; }
-        .bg-growth-green { background-color: #2E8B57; }
-        .text-growth-green { color: #2E8B57; }
-        .text-wealth-gold { color: #DAA520; }
-        .hover\:bg-growth-green-dark:hover { background-color: #246d45; }
-        .hover\:bg-brand-dark-light:hover { background-color: #374151; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>News - Cocoa Potash</title>
+
+  <!-- Tailwind (runtime config first) -->
+  <script>
+    tailwind = {
+      config: {
+        theme: {
+          extend: {
+            colors: {
+              'brand-dark': '#111827',
+              'brand-secondary-dark': '#1F2937',
+              'growth-green': '#2E8B57',
+              'wealth-gold': '#DAA520'
+            }
+          }
+        }
+      }
+    };
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Meta / SEO -->
+  <meta name="description" content="Latest news and updates from Cocoa Potash: awards, partnerships, and progress on circular economy solutions." />
+  <meta property="og:title" content="News - Cocoa Potash" />
+  <meta property="og:description" content="Follow our journey as we innovate and grow." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="images/LogoCocoaPotash.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="images/LogoCocoaPotash.png" />
+
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+
+    /* Top banner with dark corner gradients over the background image */
+    .press-hero {
+      position: relative;
+      background-image: url('images/MITWFATEAMPIC.jpg'); 
+      background-size: cover;
+      background-position: center 20%;
+      min-height: 300px; /* adjust as needed */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      
+    }
+    .press-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      /* four dark corner gradients + subtle overall dark overlay */
+      background:
+        radial-gradient(1200px 600px at top left, rgba(0,0,0,0.70), transparent 60%),
+        radial-gradient(1200px 600px at top right, rgba(0,0,0,0.70), transparent 60%),
+        radial-gradient(1200px 600px at bottom left, rgba(0,0,0,0.70), transparent 60%),
+        radial-gradient(1200px 600px at bottom right, rgba(0,0,0,0.70), transparent 60%),
+        linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35));
+      pointer-events: none;
+    }
+  </style>
 </head>
 <body class="bg-white">
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <a href="index.html" class="flex items-center space-x-2">
-                    <img src="images/LogoCocoaPotash.png" alt="Cocoa Potash Logo" class="h-10 w-auto">
-                </a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-600 hover:text-growth-green font-medium">Home</a>
-                    <a href="index.html#products" class="text-gray-600 hover:text-growth-green font-medium">Our Products</a>
-                    <a href="news.html" class="text-growth-green font-bold">News</a>
-                    <a href="about.html" class="text-gray-600 hover:text-growth-green font-medium">About Us</a>
-                </div>
-                <div class="hidden md:block">
-                    <a href="index.html#contact" class="bg-brand-dark text-white font-bold py-2 px-5 rounded-lg shadow-lg hover:bg-brand-dark-light transition-colors duration-300">
-                        Contact Us
-                    </a>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-button-news" class="text-gray-700 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
-                    </button>
-                </div>
-            </div>
-            <div id="mobile-menu-news" class="hidden md:hidden pb-4">
-                <a href="index.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Home</a>
-                <a href="index.html#products" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Our Products</a>
-                <a href="news.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">News</a>
-                <a href="about.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">About Us</a>
-                <a href="index.html#contact" class="block mt-2 text-center bg-brand-dark text-white font-bold py-2 px-5 rounded-lg">Contact Us</a>
-            </div>
-        </nav>
-    </header>
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <a href="index.html" class="flex items-center space-x-2">
+          <img src="images/LogoCocoaPotash.png" alt="Cocoa Potash logo" class="h-10 w-auto" width="160" height="40" />
+        </a>
 
-    <main class="py-16 md:py-24">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-brand-dark">Latest News & Updates</h1>
-                <p class="mt-4 text-xl text-gray-600">Follow our journey as we continue to innovate and grow.</p>
-            </div>
-
-            <div class="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- News Article Card -->
-                <div class="flex flex-col bg-gray-50 rounded-lg shadow-lg overflow-hidden">
-                    <img class="w-full h-56 object-cover" src="images/MITWFATEAMPIC.jpg" alt="MIT Prize">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <p class="text-sm text-gray-500">April 30, 2025</p>
-                        <h3 class="mt-2 text-xl font-bold text-brand-dark">Cocoa Potash Wins $20,000 at MIT Innovation Prize</h3>
-                        <p class="mt-3 text-base text-gray-600 flex-grow">We are proud to be recognized as the runner-up at the 2025 MIT Water, Food & Agriculture Innovation Prize. This award for our eco-friendly process fuels our mission to drive sustainable farming and circular economies worldwide.</p>
-                        <a href="#" class="mt-4 text-growth-green font-semibold hover:underline">Read Full Story &rarr;</a>
-                    </div>
-                </div>
-                <!-- News Article Card -->
-                <div class="flex flex-col bg-gray-50 rounded-lg shadow-lg overflow-hidden">
-                    <img class="w-full h-56 object-cover" src="images/hult-prize-hero.jpeg" alt="Hult Prize">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <p class="text-sm text-gray-500">March 15, 2025</p>
-                        <h3 class="mt-2 text-xl font-bold text-brand-dark">Reflecting on Our Hult Prize Journey</h3>
-                        <p class="mt-3 text-base text-gray-600 flex-grow">Our time as a global finalist in the Hult Prize Global Incubator, with mentorship from industry leaders, sharpened our mission to tackle agricultural waste and empower communities. The journey reaffirmed one truth: the customer is the hero.</p>
-                        <a href="#" class="mt-4 text-growth-green font-semibold hover:underline">Read Full Story &rarr;</a>
-                    </div>
-                </div>
-                <!-- News Article Card -->
-                <div class="flex flex-col bg-gray-50 rounded-lg shadow-lg overflow-hidden">
-                    <img class="w-full h-56 object-cover" src="images/Cocoa Potash GreenTownLab.heic" alt="Greentown Labs">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <p class="text-sm text-gray-500">February 20, 2025</p>
-                        <h3 class="mt-2 text-xl font-bold text-brand-dark">Cocoa Potash Visits Greentown Labs</h3>
-                        <p class="mt-3 text-base text-gray-600 flex-grow">We connected with North America's largest climatetech incubator to explore innovations in decarbonization, clean energy, and sustainable materials, gaining key insights to scale our solutions.</p>
-                        <a href="#" class="mt-4 text-growth-green font-semibold hover:underline">Read Full Story &rarr;</a>
-                    </div>
-                </div>
-            </div>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="text-gray-600 hover:text-growth-green font-medium focus:outline-none focus:ring-2 focus:ring-growth-green focus:ring-offset-2 focus:ring-offset-white rounded">Home</a>
+          <a href="index.html#products" class="text-gray-600 hover:text-growth-green font-medium focus:outline-none focus:ring-2 focus:ring-growth-green focus:ring-offset-2 focus:ring-offset-white rounded">Our Products</a>
+          <a href="news.html" class="text-growth-green font-bold focus:outline-none focus:ring-2 focus:ring-growth-green focus:ring-offset-2 focus:ring-offset-white rounded">News</a>
+          <a href="about.html" class="text-gray-600 hover:text-growth-green font-medium focus:outline-none focus:ring-2 focus:ring-growth-green focus:ring-offset-2 focus:ring-offset-white rounded">About Us</a>
         </div>
-    </main>
 
-    <!-- Footer -->
-    <footer id="contact" class="bg-brand-dark text-white mt-16">
-        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="md:col-span-2">
-                    <a href="index.html" class="flex items-center space-x-2"><img src="images/LogoCocoaPotash.png" alt="Cocoa Potash Logo" class="h-10 w-auto"></a>
-                    <p class="mt-4 text-gray-400 max-w-xs">Pioneering Africa's circular economy by transforming agricultural waste into sustainable wealth for farms and industries.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold tracking-wider uppercase">Links</h3>
-                    <ul class="mt-4 space-y-2">
-                        <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
-                        <li><a href="index.html#products" class="text-gray-400 hover:text-white">Products</a></li>
-                        <li><a href="news.html" class="text-gray-400 hover:text-white">News</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold tracking-wider uppercase">Contact us</h3>
-                    <ul class="mt-4 space-y-2 text-gray-400">
-                        <li>Cocoa Potash Limited</li>
-                        <li>P. O. Box 23, Bekwai Ashanti Region</li>
-                        <li class="hover:text-white"><a href="mailto:info@cocoapotash.com">Email: info@cocoapotash.com</a></li>
-                        <li class="hover:text-white"><a href="tel:+23355704707">+23355704707</a> / <a href="tel:+233505554040">+233505554040</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-12 border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-between items-center">
-                <p class="text-gray-500">&copy; 2025 Cocoa Potash Limited. All Rights Reserved.</p>
-                <div class="flex space-x-6 mt-4 sm:mt-0">
-                    <a href="#" class="text-gray-400 hover:text-white"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
-                    <a href="#" class="text-gray-400 hover:text-white"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
-                    <a href="#" class="text-gray-400 hover:text-white"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12.001c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.001C22 6.477 17.523 2 12 2z" clip-rule="evenodd" /></svg></a>
-                </div>
-            </div>
+        <div class="hidden md:block">
+          <a href="index.html#contact" class="bg-brand-dark text-white font-bold py-2 px-5 rounded-lg hover:bg-brand-dark/80 transition-colors duration-300">
+            Contact Us
+          </a>
         </div>
-    </footer>
-    <script>
-        const mobileMenuButtonNews = document.getElementById('mobile-menu-button-news');
-        const mobileMenuNews = document.getElementById('mobile-menu-news');
-        mobileMenuButtonNews.addEventListener('click', () => {
-            mobileMenuNews.classList.toggle('hidden');
-        });
-    </script>
+
+        <div class="md:hidden">
+          <button id="mobile-menu-button-news"
+                  class="text-gray-700 focus:outline-none focus:ring-2 focus:ring-growth-green rounded p-1"
+                  aria-controls="mobile-menu-news"
+                  aria-expanded="false"
+                  aria-label="Open menu">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="mobile-menu-news" class="hidden md:hidden pb-4">
+        <a href="index.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Home</a>
+        <a href="index.html#products" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Our Products</a>
+        <a href="news.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">News</a>
+        <a href="about.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">About Us</a>
+        <a href="index.html#contact" class="block mt-2 text-center bg-brand-dark text-white font-bold py-2 px-5 rounded-lg">Contact Us</a>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Press banner -->
+  <section class="press-hero">
+    <div class="relative z-[1] max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+      <h1 class="text-center text-4xl md:text-5xl font-extrabold text-white">Press</h1>
+    </div>
+  </section>
+
+  <main class="py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <p class="text-center max-w-3xl mx-auto text-lg text-gray-600">
+        Follow our journey as we continue to innovate and grow.
+      </p>
+
+      <!-- NEWS GRID: 4 columns x 5 rows (20 items). No borders/shadows; page uses main scrollbar only. -->
+      <section aria-label="News articles" class="mt-10">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
+
+          <!-- Reusable card pattern: image (small standard), date, title, snippet, link -->
+          <!-- 1 -->
+          <article class="flex flex-col">
+            <img src="images/MITWFATEAMPIC.jpg"
+                 alt="Cocoa Potash team at MIT Innovation Prize"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2025-04-30" class="text-xs text-gray-500">Apr 30, 2025</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Runner‑up at MIT Innovation Prize</h2>
+              <p class="mt-2 text-sm text-gray-600">Recognition for our eco‑friendly process fuels our mission.</p>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+
+          <!-- 2 -->
+          <article class="flex flex-col">
+            <img src="images/hult-prize-hero.jpeg"
+                 alt="Hult Prize Global Incubator"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2025-03-15" class="text-xs text-gray-500">Mar 15, 2025</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Reflecting on Our Hult Prize Journey</h2>
+              <p class="mt-2 text-sm text-gray-600">Mentorship sharpened our mission to empower communities.</p>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+
+          <!-- 3 -->
+          <article class="flex flex-col">
+            <!-- TIP: convert .heic to .webp/.jpg for cross‑browser support -->
+            <img src="images/Greentownlabs.jpeg"
+                 alt="Visit to Greentown Labs"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2025-02-20" class="text-xs text-gray-500">Feb 20, 2025</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Cocoa Potash Visits Greentown Labs</h2>
+              <p class="mt-2 text-sm text-gray-600">Exploring climatetech to scale decarbonization solutions.</p>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+
+          <!-- 4 -->
+          <article class="flex flex-col">
+            <img src="images/MITWFATEAMPIC.jpg"
+                 alt="Award photo"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2025-01-12" class="text-xs text-gray-500">Jan 12, 2025</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Award Spotlight</h2>
+              <p class="mt-2 text-sm text-gray-600">Celebrating milestones in circular economy innovation.</p>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+
+          <!-- 5 -->
+          <article class="flex flex-col">
+            <img src="images/hult-prize-hero.jpeg"
+                 alt="Pitch day"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2024-12-10" class="text-xs text-gray-500">Dec 10, 2024</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Pitch Day Highlights</h2>
+              <p class="mt-2 text-sm text-gray-600">Key lessons from investors and industry partners.</p>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+
+          <!-- 6 -->
+          <article class="flex flex-col">
+            <img src="images/MITWFATEAMPIC.jpg"
+                 alt="Team at event"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2024-11-28" class="text-xs text-gray-500">Nov 28, 2024</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Community Engagement</h2>
+              <p class="mt-2 text-sm text-gray-600">Partnering with local farmers to reduce waste.</p>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+
+          <!-- 7 -->
+          <article class="flex flex-col">
+            <img src="images/hult-prize-hero.jpeg"
+                 alt="Workshop"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2024-10-05" class="text-xs text-gray-500">Oct 5, 2024</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Farmer Workshop</h2>
+              <p class="mt-2 text-sm text-gray-600">Training on soil health and regenerative practices.</p>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+
+          <!-- 8 -->
+          <article class="flex flex-col">
+            <img src="images/Cocoa Potash GreenTownLab.heic"
+                 alt="Lab visit"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2024-09-14" class="text-xs text-gray-500">Sep 14, 2024</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Lab Collaboration</h2>
+              <p class="mt-2 text-sm text-gray-600">Exploring materials for cleaner production.</p>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+
+          <!-- 9 -->
+          <article class="flex flex-col">
+            <img src="images/MITWFATEAMPIC.jpg"
+                 alt="Award ceremony"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2024-08-02" class="text-xs text-gray-500">Aug 2, 2024</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Industry Recognition</h2>
+              <p class="mt-2 text-sm text-gray-600">Spotlight on sustainable inputs for industry.</p>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+
+          <!-- 10 -->
+          <article class="flex flex-col">
+            <img src="images/hult-prize-hero.jpeg"
+                 alt="Incubator cohort"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2024-07-10" class="text-xs text-gray-500">Jul 10, 2024</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Incubator Learnings</h2>
+              <p class="mt-2 text-sm text-gray-600">Customer discovery and product‑market fit.</p>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+
+          <!-- 11 -->
+          <article class="flex flex-col">
+            <img src="images/Cocoa Potash GreenTownLab.heic"
+                 alt="Prototype testing"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2024-06-22" class="text-xs text-gray-500">Jun 22, 2024</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Prototype Testing</h2>
+              <p class="mt-2 text-sm text-gray-600">Validating performance with pilot partners.</p>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+
+          <!-- 12 -->
+          <article class="flex flex-col">
+            <img src="images/MITWFATEAMPIC.jpg"
+                 alt="Conference networking"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2024-05-18" class="text-xs text-gray-500">May 18, 2024</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Conference Highlights</h2>
+              <p class="mt-2 text-sm text-gray-600">Alliances for circular supply chains.</p>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer id="contact" class="bg-brand-dark text-white mt-16">
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-2">
+          <a href="index.html" class="flex items-center space-x-2">
+            <img src="images/LogoCocoaPotash.png" alt="Cocoa Potash logo" class="h-10 w-auto" width="160" height="40" loading="lazy" decoding="async" />
+          </a>
+          <p class="mt-4 text-gray-400 max-w-xs">
+            Pioneering Africa's circular economy by transforming agricultural waste into sustainable wealth for farms and industries.
+          </p>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold tracking-wider uppercase">Links</h3>
+          <ul class="mt-4 space-y-2">
+            <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+            <li><a href="index.html#products" class="text-gray-400 hover:text-white">Products</a></li>
+            <li><a href="news.html" class="text-gray-400 hover:text-white">News</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-semibold tracking-wider uppercase">Contact us</h3>
+          <ul class="mt-4 space-y-2 text-gray-400">
+            <li>Cocoa Potash Limited</li>
+            <li>P. O. Box 23, Bekwai Ashanti Region</li>
+            <li class="hover:text-white"><a href="mailto:info@cocoapotash.com">Email: info@cocoapotash.com</a></li>
+            <li class="hover:text-white">
+              <a href="tel:+23355704707">+233 557 047 07</a> /
+              <a href="tel:+233505554040">+233 505 554 040</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="mt-12 border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-between items-center">
+        <p class="text-gray-500">&copy; 2025 Cocoa Potash Limited. All Rights Reserved.</p>
+        <div class="flex space-x-6 mt-4 sm:mt-0">
+          <a href="#" class="text-gray-400 hover:text-white" aria-label="Facebook"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
+          <a href="#" class="text-gray-400 hover:text-white" aria-label="Twitter / X"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
+          <a href="#" class="text-gray-400 hover:text-white" aria-label="GitHub"><svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12.001c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12.001C22 6.477 17.523 2 12 2z" clip-rule="evenodd" /></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const btn = document.getElementById('mobile-menu-button-news');
+    const menu = document.getElementById('mobile-menu-news');
+
+    function toggleMenu() {
+      const isOpen = !menu.classList.contains('hidden');
+      menu.classList.toggle('hidden');
+      btn.setAttribute('aria-expanded', String(!isOpen));
+      btn.setAttribute('aria-label', !isOpen ? 'Close menu' : 'Open menu');
+    }
+    btn.addEventListener('click', toggleMenu);
+    btn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleMenu(); }
+    });
+  </script>
 </body>
 </html>
