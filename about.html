@@ -25,7 +25,7 @@
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center py-4">
                 <a href="index.html" class="flex items-center space-x-2">
-                    <img src="images/LogoCocoaPotash.png" alt="Cocoa Potash Logo" class="h-10 w-auto">
+                    <img src="images/cocoa_potash_blk.png" alt="Cocoa Potash Logo" class="h-10 w-auto">
                 </a>
                 <div class="hidden md:flex items-center space-x-8">
                     <a href="index.html" class="text-gray-600 hover:text-growth-green font-medium">Home</a>
@@ -55,13 +55,29 @@
     </header>
 
     <main>
-        <!-- About Hero Section -->
-        <section class="bg-brand-secondary-dark text-white py-20 md:py-28">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold">We are innovators, entrepreneurs, and community builders.</h1>
-                <p class="mt-4 text-xl text-gray-300 max-w-3xl mx-auto">Our team combines deep expertise in engineering and business with a passion for creating sustainable change from the ground up.</p>
-            </div>
-        </section>
+<!-- About Hero Section -->
+<section class="relative">
+  <!-- background image -->
+  <img src="images/teams.jpeg"
+       alt="Cocoa Potash team"
+       class="absolute inset-0 w-full h-full object-cover" />
+  <!-- black overlay -->
+  <div class="absolute inset-0 bg-black/60"></div>
+
+  <!-- content -->
+  <div class="relative text-white py-20 md:py-28">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h1 class="text-3xl md:text-3xl font-bold">
+        We are innovators, entrepreneurs, and community builders.
+      </h1>
+      <p class="mt-4 text-xl text-gray-200 max-w-3xl mx-auto">
+        Our team combines deep expertise in engineering and business with a passion for creating sustainable change from the ground up.
+      </p>
+    </div>
+  </div>
+</section>
+
+
 
         <!-- Team Section -->
         <section class="py-16 md:py-24">
