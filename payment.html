@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cocoa Potash | Payment</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .bg-brand-dark { background-color: #111827; }
+    .bg-growth-green { background-color: #2E8B57; }
+    .hover\:bg-growth-green-dark:hover { background-color: #246d45; }
+    .payment-logo {
+      filter: grayscale(100%);
+      transition: filter 0.3s ease;
+    }
+    .payment-logo:hover {
+      filter: grayscale(0%);
+    }
+  </style>
+</head>
+
+<body class="bg-gray-50">
+  <!-- Header -->
+
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="index.html" class="flex items-center space-x-2">
+        <img src="images/cocoa_potash_blk.png" alt="Cocoa Potash Logo" class="h-10 w-auto">
+      </a>
+      <h2 class="text-lg font-semibold text-gray-700">Secure Payment</h2>
+    </div>
+  </header>
+
+  <!-- Main Payment Section -->
+  <main class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
+    <!-- Left: Payment Form -->
+    <div class="bg-white rounded-2xl shadow-md p-8">
+      <h2 class="text-2xl font-bold text-brand-dark mb-6">Checkout</h2>
+
+      <!-- PayPal Checkout + Payment Logos Grid -->
+      <div class="mb-8">
+        <div id="paypal-button-container" class="mb-6"></div>
+        
+        <!-- Payment Logos Grid -->
+        <div class="grid grid-cols-3 sm:grid-cols-6 gap-6 items-center justify-items-center">
+          <img src="images/paypal.png" alt="PayPal" class="h-10 w-auto payment-logo">
+          <img src="images/visacard.png" alt="Visa" class="h-10 w-auto payment-logo">
+          <img src="images/mastercard.png" alt="MasterCard" class="h-10 w-auto payment-logo">
+          <img src="images/momo.jpeg" alt="MTN MoMo" class="h-10 w-auto payment-logo">
+          <img src="images/banktranser.png" alt="AirtelTigo" class="h-10 w-auto payment-logo">
+        </div>
+      </div>
+
+      <hr class="my-6">
+
+      <!-- Contact and Delivery -->
+      <form id="manual-payment-form" class="space-y-4">
+        <h3 class="text-lg font-semibold text-gray-700 mb-2">Contact</h3>
+        <input type="email" placeholder="Email or mobile number" required
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-growth-green outline-none">
+
+        <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Delivery Details</h3>
+        <div class="grid grid-cols-2 gap-3">
+          <input type="text" placeholder="First Name" required class="border border-gray-300 rounded-lg px-4 py-2">
+          <input type="text" placeholder="Last Name" required class="border border-gray-300 rounded-lg px-4 py-2">
+        </div>
+        <input type="text" placeholder="Address" required class="w-full border border-gray-300 rounded-lg px-4 py-2">
+        <div class="grid grid-cols-3 gap-3">
+          <input type="text" placeholder="City" required class="border border-gray-300 rounded-lg px-4 py-2">
+          <input type="text" placeholder="Region/State" required class="border border-gray-300 rounded-lg px-4 py-2">
+          <input type="text" placeholder="Postal Code" required class="border border-gray-300 rounded-lg px-4 py-2">
+        </div>
+
+        <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Payment Method</h3>
+        <select id="payment-method" class="w-full border border-gray-300 rounded-lg px-4 py-2">
+          <option value="card">Credit / Debit Card</option>
+          <option value="mobile-money">Mobile Money</option>
+          <option value="bank-transfer">Bank Transfer</option>
+        </select>
+
+        <button type="submit"
+          class="w-full bg-growth-green text-white font-semibold py-3 rounded-lg hover:bg-growth-green-dark transition mt-4">
+          Confirm Payment
+        </button>
+      </form>
+    </div>
+
+    <!-- Right: Order Summary -->
+    <div class="bg-white rounded-2xl shadow-md p-8">
+      <h2 class="text-2xl font-bold text-brand-dark mb-6">Order Summary</h2>
+      <div id="order-items" class="space-y-4">
+        <p class="text-gray-600">Loading your cart...</p>
+      </div>
+      <hr class="my-4">
+      <div class="flex justify-between font-semibold text-lg">
+        <span>Total</span>
+        <span id="order-total">$0.00</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- bottom footer -->
+  <footer id="contact" class="bg-brand-dark text-white">
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-2">
+          <a href="index.html" class="flex items-center space-x-2">
+            <img src="images/logo_white_large.png" alt="Cocoa Potash Logo" class="h-10 w-auto">
+          </a>
+          <p class="mt-4 text-gray-400 max-w-xs">
+            Pioneering Africa's potash economy by transforming agricultural waste into sustainable wealth for farms and industries.
+          </p>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold tracking-wider uppercase">Links</h3>
+          <ul class="mt-4 space-y-2">
+            <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+            <li><a href="index.html#products" class="text-gray-400 hover:text-white">Products</a></li>
+            <li><a href="news.html" class="text-gray-400 hover:text-white">News</a></li>
+            <li><a href="shop_now.html" class="text-gray-400 hover:text-white">Shop Now</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="text-lg font-semibold tracking-wider uppercase">Get in Touch</h3>
+          <ul class="mt-4 space-y-2 text-gray-400">
+            <li>Cocoa Potash Limited</li>
+            <li>P. O. Box 23, Bekwai Ashanti Region</li>
+            <li><a href="mailto:info@cocoapotash.com" class="hover:text-white">info@cocoapotash.com</a></li>
+            <li><a href="tel:+23355704707" class="hover:text-white">+233557848787</a> / <a href="tel:+233505554040" class="hover:text-white">+233505554040</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-12 border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-between items-center">
+        <p class="text-gray-500">&copy; 2025 Cocoa Potash Limited. All Rights Reserved.</p>
+        <div class="flex space-x-6 mt-4 sm:mt-0">
+          <a href="https://www.linkedin.com/company/81955507" target="_blank" class="text-gray-400 hover:text-white">
+            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.1c.5-.95 1.75-2.2 3.6-2.2 3.85 0 4.6 2.5 4.6 5.8V24h-4v-8.6c0-2.05-.05-4.7-2.85-4.7-2.85 0-3.3 2.25-3.3 4.55V24h-4V8z" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- PayPal SDK -->
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
+
+  <script>
+    // Load cart from localStorage (from previous checkout)
+    const orderContainer = document.getElementById('order-items');
+    const orderTotal = document.getElementById('order-total');
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+
+    function renderOrder() {
+      orderContainer.innerHTML = '';
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price * item.qty;
+        const div = document.createElement('div');
+        div.classList.add('flex', 'justify-between', 'items-center');
+        div.innerHTML = `
+          <div class="flex items-center space-x-3">
+            <img src="${item.img}" class="h-12 w-12 object-contain rounded" alt="${item.name}">
+            <div>
+              <p class="font-medium text-gray-800">${item.name}</p>
+              <p class="text-sm text-gray-500">x${item.qty}</p>
+            </div>
+          </div>
+          <p class="font-semibold text-gray-700">$${(item.price * item.qty).toFixed(2)}</p>
+        `;
+        orderContainer.appendChild(div);
+      });
+      orderTotal.textContent = '$' + total.toFixed(2);
+      return total;
+    }
+
+    const totalAmount = renderOrder();
+
+    // PayPal Integration
+    paypal.Buttons({
+      style: { layout: 'horizontal', color: 'gold', shape: 'rect', label: 'paypal' },
+      createOrder: function(data, actions) {
+        return actions.order.create({
+          purchase_units: [{
+            amount: { value: totalAmount.toFixed(2) },
+            description: "Cocoa Potash Order"
+          }]
+        });
+      },
+      onApprove: function(data, actions) {
+        return actions.order.capture().then(function(details) {
+          alert('Payment successful! Thank you, ' + details.payer.name.given_name);
+          localStorage.removeItem('cart');
+          window.location.href = 'thank-you.html';
+        });
+      },
+      onError: function(err) {
+        console.error(err);
+        alert('There was an error processing your payment.');
+      }
+    }).render('#paypal-button-container');
+
+    // Manual payment form (placeholder)
+    document.getElementById('manual-payment-form').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Manual payment (card / mobile money / bank transfer) submitted!');
+      localStorage.removeItem('cart');
+      window.location.href = 'thank-you.html';
+    });
+  </script>
+</body>
+</html>
