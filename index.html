@@ -1,224 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cocoa Potash - Transforming Agricultural Waste Into Sustainable Products</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        /* Brand palette */
-        .bg-brand-dark { background-color: #111827; } /* gray-900 */
-        .bg-brand-secondary-dark { background-color: #1F2937; } /* gray-800 */
-        .text-brand-dark { color: #111827; }
-        .bg-growth-green { background-color: #2E8B57; }
-        .text-growth-green { color: #2E8B57; }
-        .text-wealth-gold { color: #DAA520; }
-        .hover\:bg-growth-green-dark:hover { background-color: #246d45; }
-        .hover\:bg-brand-dark-light:hover { background-color: #374151; } /* gray-700 */
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cocoa Potash - Transforming Agricultural Waste Into Sustainable Wealth</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+    }
 
-        /* Logo carousel (unchanged) */
-        .carousel-track {
-            display: flex;
-            width: calc(250px * 18);
-            animation: scroll 60s linear infinite;
-        }
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-250px * 9)); }
-        }
-        .carousel-container { overflow: hidden; position: relative; width: 100%; }
-        .carousel-container::before, .carousel-container::after {
-            content: ''; position: absolute; top: 0; bottom: 0; width: 10rem; z-index: 2;
-        }
-        .carousel-container::before { left: 0; background: linear-gradient(to right, #f3f4f6, transparent); }
-        .carousel-container::after { right: 0; background: linear-gradient(to left, #f3f4f6, transparent); }
-    </style>
+    /* Brand palette */
+    .bg-brand-dark {
+      background-color: #111827;
+    }
+    .bg-brand-secondary-dark {
+      background-color: #1f2937;
+    }
+    .text-brand-dark {
+      color: #111827;
+    }
+    .bg-growth-green {
+      background-color: #2e8b57;
+    }
+    .text-growth-green {
+      color: #2e8b57;
+    }
+    .text-wealth-gold {
+      color: #daa520;
+    }
+    .hover\:bg-growth-green-dark:hover {
+      background-color: #246d45;
+    }
+    .hover\:bg-brand-dark-light:hover {
+      background-color: #374151;
+    }
+
+    /* Carousel */
+    .carousel-track {
+      display: flex;
+      width: calc(250px * 18);
+      animation: scroll 60s linear infinite;
+    }
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(calc(-250px * 9));
+      }
+    }
+    .carousel-container {
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+    }
+    .carousel-container::before,
+    .carousel-container::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 10rem;
+      z-index: 2;
+    }
+    .carousel-container::before {
+      left: 0;
+      background: linear-gradient(to right, #f3f4f6, transparent);
+    }
+    .carousel-container::after {
+      right: 0;
+      background: linear-gradient(to left, #f3f4f6, transparent);
+    }
+
+    /* Fix full-width background alignment */
+    section.full-bg {
+      width: 100vw;
+      position: relative;
+      left: 50%;
+      right: 50%;
+      margin-left: -50vw;
+      margin-right: -50vw;
+    }
+  </style>
 </head>
 <body class="bg-white">
+  <!-- Header -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <a href="index.html" class="flex items-center space-x-2">
+          <img
+            src="images/cocoa_potash_blk.png"
+            alt="Cocoa Potash Logo"
+            class="h-10 w-auto"
+          />
+        </a>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="text-gray-600 hover:text-growth-green font-medium">Home</a>
+          <a href="#products" class="text-gray-600 hover:text-growth-green font-medium">Our Products</a>
+          <a href="news.html" class="text-gray-600 hover:text-growth-green font-medium">News</a>
+          <a href="about.html" class="text-gray-600 hover:text-growth-green font-medium">About Us</a>
+        </div>
+        <div class="hidden md:block">
+          <a
+            href="request-sample.html"
+            class="bg-brand-dark text-white font-bold py-2 px-5 rounded-lg shadow-lg hover:bg-brand-dark-light transition-colors duration-300"
+          >
+            Contact Us
+          </a>
+        </div>
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden pb-4">
+        <a href="index.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Home</a>
+        <a href="#products" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Our Products</a>
+        <a href="news.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">News</a>
+        <a href="about.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">About Us</a>
+        <a href="#contact" class="block mt-2 text-center bg-brand-dark text-white font-bold py-2 px-5 rounded-lg">Contact Us</a>
+      </div>
+    </nav>
+  </header>
 
-    <!-- Header / Navigation -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center py-4">
-                <a href="index.html" class="flex items-center space-x-2">
-                    <img src="images/cocoa_potash_blk.png" alt="Cocoa Potash Logo" class="h-10 w-auto">
-                </a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="index.html" class="text-gray-600 hover:text-growth-green font-medium">Home</a>
-                    <a href="#products" class="text-gray-600 hover:text-growth-green font-medium">Our Products</a>
-                    <a href="news.html" class="text-gray-600 hover:text-growth-green font-medium">News</a>
-                    <a href="about.html" class="text-gray-600 hover:text-growth-green font-medium">About Us</a>
-                </div>
-                <div class="hidden md:block">
-                    <a href="request-sample.html" class="bg-brand-dark text-white font-bold py-2 px-5 rounded-lg shadow-lg hover:bg-brand-dark-light transition-colors duration-300">
-                        Contact Us
-                    </a>
-                </div>
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
-                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
-                    </button>
-                </div>
-            </div>
-            <div id="mobile-menu" class="hidden md:hidden pb-4">
-                <a href="index.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Home</a>
-                <a href="#products" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Our Products</a>
-                <a href="news.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">News</a>
-                <a href="about.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">About Us</a>
-                <a href="#contact" class="block mt-2 text-center bg-brand-dark text-white font-bold py-2 px-5 rounded-lg">Contact Us</a>
-            </div>
-        </nav>
-    </header>
+  <main>
+    <!-- Hero -->
+    <section class="bg-black text-white relative">
+      <div class="absolute inset-0">
+        <img src="images/CocoaPodHeroImage.jpeg" class="w-full h-full object-cover opacity-20" alt="A pile of cocoa pod husks" />
+      </div>
+      <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
+        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight md:whitespace-nowrap">
+          Transforming Agricultural Waste Into Sustainable Wealth
+        </h1>
+        <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-300">
+          We transform high-emissions agricultural waste from cocoa, coconut, and palm-nut into premium organic potash, fertilizer, and renewable energy.
+        </p>
+        <div class="mt-8">
+          <a href="#products" class="inline-block bg-brand-dark text-white font-bold py-3 px-10 rounded-lg shadow-xl hover:bg-brand-dark-light ring-2 ring-white transition-all duration-300 transform hover:scale-105 text-lg">
+            Discover Our Products
+          </a>
+        </div>
+      </div>
+    </section>
 
-    <main>
-        <!-- Hero Section -->
-        <section class="bg-black text-white relative">
-            <div class="absolute inset-0">
-                <img src="images/CocoaPodHeroImage.jpeg" class="w-full h-full object-cover opacity-20" alt="A pile of cocoa pod husks">
-            </div>
-            <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 md:py-32 text-center">
-                <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight md:whitespace-nowrap">Transforming Agricultural Waste Into Sustainable Products</h1>
-                <p class="mt-6 max-w-3xl mx-auto text-lg md:text-xl text-gray-300">We transform high-emissions agricultural waste from cocoa, coconut, and palm-nut into premium organic potash, fertilizer, and african black soap</p>
-                <div class="mt-8">
-                    <a href="#products" class="inline-block bg-brand-dark text-white font-bold py-3 px-10 rounded-lg shadow-xl hover:bg-brand-dark-light ring-2 ring-white transition-all duration-300 transform hover:scale-105 text-lg">Discover Our Products</a>
-                </div>
-            </div>
-        </section>
+    <!-- Intro -->
+    <section class="py-16 md:py-24 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <div class="space-y-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-brand-dark tracking-tight">
+              Powering Africa’s Circular Future
+            </h2>
+            <p class="text-lg text-gray-700">
+              Rooted in Ghana’s farming communities, Cocoa Potash tackles one of agriculture’s biggest challenges, reducing waste and regenerating the land,while delivering affordable organic fertilizer for farmers and high-purity, ESG-compliant organic potash for industry. We strengthen agricultural and industrial supply chains to drive Africa’s circular economy forward.
+            </p>
+            <p class="text-lg text-gray-700">
+              We Partner directly with farmers to convert millions of kilograms of agricultural waste into sustainable, high-value products that cuts emissions, and supply industries with responsible inputs for farming, manufacturing, and technology.
+            </p>
+            <a href="#impact" class="inline-block text-growth-green font-semibold text-lg hover:underline">See Our Impact in Action &rarr;</a>
+          </div>
+          <div class="rounded-lg shadow-2xl w-full overflow-hidden">
+            <iframe class="w-full aspect-video"
+              src="https://www.youtube.com/embed/uFR3ooH5OgE"
+              title="Cocoa Potash video" frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
 
-        <!-- Introductory Section -->
-        <section class="py-16 md:py-24 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                    <div class="space-y-6">
-                        <h2 class="text-3xl md:text-4xl font-bold text-brand-dark tracking-tight">Powering Africa’s Circular Future</h2>
-                        <p class="text-lg text-gray-700"> We are tackling one of agriculture’s biggest challenges,reducing waste, while delivering high-purity, ESG-compliant organic potash for industries and affordable organic fertilizer for farmers. We are strengthening the agricultural and industrial supply chains to drive Africa’s circular economy forward.</p>
-                        <p class="text-lg text-gray-700"> We Partner directly with farmers to convert millions of kilograms of agricultural waste into sustainable, high-value products that cuts emissions, and supply industries with responsible inputs for farming, manufacturing, and technology. Our vision is to pioneer Africa’s organic potash economy and set a global blueprint for transforming waste into progress, restored ecosystems, and empowered people.</p>
-                        <a href="#impact" class="inline-block text-growth-green font-semibold text-lg hover:underline">See Our Impact in Action &rarr;</a>
-                    </div>
-                    <div class="rounded-lg shadow-2xl w-full overflow-hidden">
-                        <iframe 
-                            class="w-full aspect-video"
-                            src="https://www.youtube.com/embed/uFR3ooH5OgE" 
-                            title="Cocoa Potash: Improving lives of cocoa farmers through economic empowerment and skill development" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                            allowfullscreen>
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- Products -->
+    <section id="products" class="py-16 md:py-24 bg-gray-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-14">
+          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark tracking-tight">
+            Products that Turn Waste into Value
+          </h2>
+          <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+            Premium quality, traceable origins, and measurable impact designed for industry, agriculture, and personal care.
+          </p>
+        </div>
 
-        
-        <!-- Details Section: PRODUCTS  -->
-        
-        <section id="products" class="py-16 md:py-24 bg-gray-50">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-14">
-                    <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark tracking-tight">Products that Turn Waste into Value</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Premium quality, traceable origins, and measurable impact designed for industry, agriculture, and personal care.</p>
-                </div>
-
-                <div class="space-y-10">
-                    <!-- Card 1: Organic Potash -->
-                    <article class="group grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm hover:shadow-lg transition p-6 md:p-8">
-                        <div class="flex items-center justify-center">
-                            <div class="h-80 w-full max-w-xl flex items-center justify-center">
-                                <img src="images/mockup_almost-removebg-preview.png" alt="Bag mockup of Organic Potash" class="h-full w-auto object-contain drop-shadow" loading="lazy" decoding="async">
-                            </div>
-                        </div>
-                        <div class="flex flex-col justify-center">
-                            <div class="flex items-center gap-3 mb-4">
-                                <span class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-growth-green px-3 py-1 rounded-full">
-                                    <span class="h-2 w-2 rounded-full bg-white/80"></span> For Industry
-                                </span>
-                                <span class="text-xs text-gray-500">Food • Pharma • Cosmetics • Biotech</span>
-                            </div>
-                            <h3 class="font-bold text-xl text-brand-dark">Organic Potash</h3>
-                            <p class="mt-3 text-gray-700">Contaminant-free, <strong>96% purity</strong> K₂CO₃ produced from agricultural by-products. A high-performance, ESG-forward input with full traceability from farm to factory.</p>
-                            <ul class="mt-5 grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
-                                <li class="flex items-start gap-2"><svg class="h-5 w-5 text-growth-green flex-none" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19l11-11-1.5-1.5z"/></svg> High purity & consistent specs</li>
-                                <li class="flex items-start gap-2"><svg class="h-5 w-5 text-growth-green" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19l11-11-1.5-1.5z"/></svg> Ethical, traceable sourcing</li>
-                                <li class="flex items-start gap-2"><svg class="h-5 w-5 text-growth-green" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19l11-11-1.5-1.5z"/></svg> Low-carbon process</li>
-                                <li class="flex items-start gap-2"><svg class="h-5 w-5 text-growth-green" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19l11-11-1.5-1.5z"/></svg> Supply assurance at scale</li>
-                            </ul>
-                            <div class="mt-6">
-                                <a href="request-sample.html" class="inline-flex items-center justify-center bg-brand-dark text-white font-semibold px-6 py-3 rounded-lg hover:bg-brand-dark-light transition">
-                                    Request a Sample
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-          <!-- Card 2: CocoBoost Organic Fertilizer -->
-          <article class="group grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm hover:shadow-lg transition p-6 md:p-8">
-            <!-- IMAGE LEFT -->
-            <div class="flex items-center justify-center">
-              <div class="h-80 w-full max-w-xl flex items-center justify-center">
-                <img src="images/cocoboost_mockup_dud.png" alt="Bags of CocoBoost Organic Potash Fertilizer" class="h-full w-auto object-contain drop-shadow" loading="lazy" decoding="async">
-              </div>
+        <!-- Cards -->
+        <div class="flex flex-col lg:flex-row gap-8 pb-6 snap-x snap-mandatory">
+          <article class="min-w-[350px] lg:min-w-[400px] bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm hover:shadow-lg transition p-6 md:p-8 flex flex-col snap-start">
+            <img src="images/mockup_almost-removebg-preview.png" alt="Organic Potash" class="h-64 w-auto mx-auto object-contain drop-shadow mb-6" />
+            <div class="flex items-center gap-3 mb-4">
+              <span class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-growth-green px-3 py-1 rounded-full">
+                <span class="h-2 w-2 rounded-full bg-white/80"></span> For Industry
+              </span>
+              <span class="text-xs text-gray-500">Food • Pharma • Biotech</span>
             </div>
-            <!-- TEXT RIGHT -->
-            <div class="flex flex-col justify-center">
-              <div class="flex items-center gap-3 mb-4">
-                <span class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-growth-green px-3 py-1 rounded-full">
-                  <span class="h-2 w-2 rounded-full bg-white/80"></span> For Agriculture
-                </span>
-                <span class="text-xs text-gray-500">Cocoa • Maize • Vegetables</span>
-              </div>
-              <h3 class="font-bold text-xl text-brand-dark">CocoBoost Organic Fertilizer</h3>
-              <p class="mt-3 text-gray-700">Locally made from local resources engineered to restore soils and raise yields while remaining <strong>more affordable than imports</strong>.</p>
-              <ul class="mt-5 grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
-                <li class="flex items-start gap-2"><svg class="h-5 w-5 text-growth-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19l11-11-1.5-1.5z"/></svg> Up to 40–50% yield increase</li>
-                <li class="flex items-start gap-2"><svg class="h-5 w-5 text-growth-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19l11-11-1.5-1.5z"/></svg> Soil health & water retention</li>
-                <li class="flex items-start gap-2"><svg class="h-5 w-5 text-growth-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19l11-11-1.5-1.5z"/></svg> 29% cost savings vs. imported chemicals</li>
-                <li class="flex items-start gap-2"><svg class="h-5 w-5 text-growth-green" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19l11-11-1.5-1.5z"/></svg> Farmer training & support</li>
-              </ul>
-              <div class="mt-6">
-                <a href="request-sample.html" class="inline-flex items-center justify-center bg-black text-white font-semibold px-6 py-3 rounded-lg hover:bg-growth-green-dark transition">
-                  Purchase for Your Farm
-                </a>
-              </div>
-            </div>
+            <h3 class="font-bold text-xl text-brand-dark">Organic Potash</h3>
+            <p class="mt-3 text-gray-700">
+              Contaminant-free, <strong>96% purity</strong> K₂CO₃ produced from agricultural by-products with full traceability.
+            </p>
           </article>
 
-
-                    <!-- Card 3: African Black Soap -->
-                    <article class="group grid grid-cols-1 lg:grid-cols-2 gap-8 bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm hover:shadow-lg transition p-6 md:p-8">
-                        <div class="flex items-center justify-center">
-                            <div class="h-80 w-full max-w-xl flex items-center justify-center">
-                                <img src="images/black soap.png" alt="African Black Soap packaging" class="h-full w-auto object-contain drop-shadow" loading="lazy" decoding="async">
-                            </div>
-                        </div>
-                        <div class="flex flex-col justify-center">
-                            <div class="flex items-center gap-3 mb-4">
-                                <span class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-growth-green px-3 py-1 rounded-full">
-                                    <span class="h-2 w-2 rounded-full bg-white/80"></span> Personal Care
-                                </span>
-                                <span class="text-xs text-gray-500">Wholesale • Retail</span>
-                            </div>
-                            <h3 class="font-bold text-xl text-brand-dark"> African Black Soap</h3>
-                            <p class="mt-3 text-gray-700">Crafted with our own sustainably sourced organic potash and natural oils. Gently cleanses and nourishes without stripping moisture.</p>
-                            <ul class="mt-5 grid sm:grid-cols-2 gap-3 text-sm text-gray-700">
-                                <li class="flex items-start gap-2"><svg class="h-5 w-5 text-growth-green" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19l11-11-1.5-1.5z"/></svg> 100% natural ingredients</li>
-                                <li class="flex items-start gap-2"><svg class="h-5 w-5 text-growth-green" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16.2l-3.5-3.5L4 14.2 9 19l11-11-1.5-1.5z"/></svg> Gentle, pH-balanced cleanse</li>
-                            </ul>
-                            <div class="mt-6">
-                                <a href="request-sample.html" class="inline-flex items-center justify-center bg-gray-900 text-white font-semibold px-6 py-3 rounded-lg hover:bg-black transition">
-                                    Shop Skincare
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
+          <article class="min-w-[350px] lg:min-w-[400px] bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm hover:shadow-lg transition p-6 md:p-8 flex flex-col snap-start">
+            <img src="images/cocoboost_mockup_dud.png" alt="CocoBoost" class="h-64 w-auto mx-auto object-contain drop-shadow mb-6" />
+            <div class="flex items-center gap-3 mb-4">
+              <span class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-growth-green px-3 py-1 rounded-full">
+                <span class="h-2 w-2 rounded-full bg-white/80"></span> For Agriculture
+              </span>
+              <span class="text-xs text-gray-500">Cocoa • Maize • Vegetables</span>
             </div>
-        </section>
+            <h3 class="font-bold text-xl text-brand-dark">CocoBoost Organic Fertilizer</h3>
+            <p class="mt-3 text-gray-700">Locally made to restore soils and raise yields while staying <strong>affordable for farmers</strong>.</p>
+          </article>
 
-        <!-- Impact Section  -->
+          <article class="min-w-[350px] lg:min-w-[400px] bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm hover:shadow-lg transition p-6 md:p-8 flex flex-col snap-start">
+            <img src="images/black soap.png" alt="African Black Soap" class="h-64 w-auto mx-auto object-contain drop-shadow mb-6" />
+            <div class="flex items-center gap-3 mb-4">
+              <span class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-growth-green px-3 py-1 rounded-full">
+                <span class="h-2 w-2 rounded-full bg-white/80"></span> Personal Care
+              </span>
+              <span class="text-xs text-gray-500">Wholesale • Retail</span>
+            </div>
+            <h3 class="font-bold text-xl text-brand-dark">African Black Soap</h3>
+            <p class="mt-3 text-gray-700">Crafted with sustainably sourced organic potash and natural oils — gentle, moisturizing, and 100% natural.</p>
+          </article>
+        </div>
+
+        <div class="mt-16 mb-16 text-center">
+          <a href="shop_now.html" class="inline-block bg-growth-green text-white font-bold py-4 px-10 rounded-lg shadow-lg hover:bg-growth-green-dark transition-colors duration-300 text-lg">
+            SHOP NOW
+          </a>
+        </div>
+      </div>
+    </section>
+
+          <!-- Impact Section  -->
         <section id="impact" class="py-16 md:py-24 bg-brand-secondary-dark text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center">
@@ -311,7 +337,7 @@
                     <div><img src="images/IbrahimQuagraine.png" class="rounded-full mx-auto w-32 h-32 shadow-lg object-cover" alt="Ibrahim Quagraine"><h3 class="mt-4 font-bold text-lg text-brand-dark">Ibrahim Quagraine</h3><p class="text-growth-green">Chief Executive Officer</p></div>
                     <div><img src="images/PrinceHeadShot.png" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Prince Agyei Baffour"><h3 class="mt-4 font-bold text-lg text-brand-dark">Prince Agyei Baffour</h3><p class="text-growth-green">Chief Operations Officer</p></div>
                     <div><img src="images/itha_pro.png" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Ithabeleng Makhetha"><h3 class="mt-4 font-bold text-lg text-brand-dark">Ithabeleng Makhetha</h3><p class="text-growth-green">Chief Finance Officer</p></div>
-                    <div><img src="images/thomas_profile.png" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Thomas Tawiah-Baah"><h3 class="mt-4 font-bold text-lg text-brand-dark">Thomas Tawiah-Baah</h3><p class="text-growth-green">Chief Technology Officer</p></div>
+                    <div><img src="images/thomas_new_pro.png" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Thomas Tawiah-Baah"><h3 class="mt-4 font-bold text-lg text-brand-dark">Thomas Tawiah-Baah</h3><p class="text-growth-green">Chief Technology Officer</p></div>
                 </div>
                 <div class="mt-12">
                     <a href="about.html" class="inline-block bg-white text-growth-green font-semibold py-3 px-8 rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors">Meet Our Full Team & Advisors</a>
