@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>News - Cocoa Potash</title>
 
-  <!-- Tailwind (runtime config first) -->
   <script>
     tailwind = {
       config: {
@@ -24,12 +23,10 @@
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Meta / SEO -->
   <meta name="description" content="Latest news and updates from Cocoa Potash: awards, partnerships, and progress on circular economy solutions." />
   <meta property="og:title" content="News - Cocoa Potash" />
   <meta property="og:description" content="Follow our journey as we innovate and grow." />
@@ -69,7 +66,6 @@
   </style>
 </head>
 <body class="bg-white">
-  <!-- Header -->
   <header class="bg-white shadow-md sticky top-0 z-50">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center py-4">
@@ -113,7 +109,6 @@
     </nav>
   </header>
 
-  <!-- Press banner -->
   <section class="press-hero">
     <div class="relative z-[1] max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-12 md:py-16">
       <h1 class="text-center text-4xl md:text-5xl font-extrabold text-white">Press</h1>
@@ -126,12 +121,22 @@
         Follow our journey as we continue to innovate and grow.
       </p>
 
-      <!-- NEWS GRID: 4 columns x 5 rows (20 items). No borders/shadows; page uses main scrollbar only. -->
       <section aria-label="News articles" class="mt-10">
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-6 gap-y-10">
 
-          <!-- Reusable card pattern: image (small standard), date, title, snippet, link -->
-          <!-- 1 -->
+          <article class="flex flex-col">
+            <img src="images/got_top.png"
+                 alt="Conference networking"
+                 class="w-full h-32 object-cover rounded"
+                 width="320" height="180"
+                 loading="lazy" decoding="async" />
+            <div class="mt-3">
+              <time datetime="2025-07-21" class="text-xs text-gray-500">Jul 21, 2025</time>
+              <h2 class="mt-1 font-semibold text-brand-dark">Top 26 Semi-Finalists in the 2025 GoGettaz Agripreneur Prize Competition</h2>
+              <a href="https://gogettaz.africa/🎉-top-26-unlocked-meet-the-semi-finalists-powering-africas-food-future-🎉/" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+            </div>
+          </article>
+          
           <article class="flex flex-col">
             <img src="images/MITWFATEAMPIC.jpg"
                  alt="Cocoa Potash team at MIT Innovation Prize"
@@ -146,7 +151,6 @@
             </div>
           </article>
 
-          <!-- 2 -->
           <article class="flex flex-col">
             <img src="images/hult-prize-hero.jpeg"
                  alt="Hult Prize Global Incubator"
@@ -157,13 +161,11 @@
               <time datetime="2025-03-15" class="text-xs text-gray-500">Mar 15, 2025</time>
               <h2 class="mt-1 font-semibold text-brand-dark">Reflecting on Our Hult Prize Journey</h2>
               <p class="mt-2 text-sm text-gray-600">Mentorship sharpened our mission to empower communities.</p>
-              <a href="https://www.linkedin.com/feed/update/urn:li:activity:7348756573734748162/" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
             </div>
           </article>
 
-          <!-- 3 -->
           <article class="flex flex-col">
-            <!-- TIP: convert .heic to .webp/.jpg for cross‑browser support -->
             <img src="images/Greentownlabs.jpeg"
                  alt="Visit to Greentown Labs"
                  class="w-full h-32 object-cover rounded"
@@ -177,7 +179,6 @@
             </div>
           </article>
 
-          <!-- 4 -->
           <article class="flex flex-col">
             <img src="images/aim2f_thumb.png"
                  alt="Award photo"
@@ -191,7 +192,6 @@
             </div>
           </article>
 
-          <!-- 5 -->
           <article class="flex flex-col">
             <img src="images/venture devils.jpg"
                  alt="Pitch day"
@@ -206,7 +206,6 @@
             </div>
           </article>
 
-          <!-- 6 -->
           <article class="flex flex-col">
             <img src="images/skills_training.jpeg"
                  alt="Team at event"
@@ -221,7 +220,6 @@
             </div>
           </article>
 
-          <!-- 7 -->
           <article class="flex flex-col">
             <img src="images/farmer_workshop.jpeg"
                  alt="Workshop"
@@ -236,7 +234,6 @@
             </div>
           </article>
 
-          <!-- 8 -->
           <article class="flex flex-col">
             <img src="images/case_hult .png"
                  alt="Lab visit"
@@ -250,7 +247,6 @@
             </div>
           </article> 
 
-          <!-- 9 -->
           <article class="flex flex-col">
             <img src="images/morganhaler.JPEG"
                  alt="Award ceremony"
@@ -264,7 +260,6 @@
             </div>
           </article>
 
-          <!-- 10 -->
           <article class="flex flex-col">
             <img src="images/itha_pitch.png"
                  alt="Incubator cohort"
@@ -272,13 +267,12 @@
                  width="320" height="180"
                  loading="lazy" decoding="async" />
             <div class="mt-3">
-              <time datetime="2024-04-11" class="text-xs text-gray-500">Apr 11, 2024</time>
+              <time datetime="2024-07-10" class="text-xs text-gray-500">Jul 10, 2024</time>
               <h2 class="mt-1 font-semibold text-brand-dark">IdeaLab Startup Showcase at Case Western Reserve University</h2>
-              <a href="http://www.eecohio.org/entrepreneurship-education-news/the-idealabs-experience" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
+              <a href="#" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
             </div>
           </article>
 
-          <!-- 11 -->
           <article class="flex flex-col">
             <img src="images/farm1.jpg"
                  alt="Prototype testing"
@@ -293,26 +287,11 @@
             </div>
           </article>
 
-          <!-- 12 -->
-          <article class="flex flex-col">
-            <img src="images/got_top.png"
-                 alt="Conference networking"
-                 class="w-full h-32 object-cover rounded"
-                 width="320" height="180"
-                 loading="lazy" decoding="async" />
-            <div class="mt-3">
-              <time datetime="2024-05-18" class="text-xs text-gray-500">Jul 21, 2025</time>
-              <h2 class="mt-1 font-semibold text-brand-dark">Top 26 Semi-Finalists in the 2025 GoGettaz Agripreneur Prize Competition</h2>
-              <a href="https://gogettaz.africa/🎉-top-26-unlocked-meet-the-semi-finalists-powering-africas-food-future-🎉/" class="mt-2 inline-block text-growth-green text-sm font-semibold hover:underline">Read Full Story →</a>
-            </div>
-          </article>
-
         </div>
       </section>
     </div>
   </main>
 
-  <!-- Footer -->
   <footer id="contact" class="bg-brand-dark text-white mt-16">
     <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
