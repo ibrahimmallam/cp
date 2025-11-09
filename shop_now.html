@@ -22,8 +22,9 @@
     /* Hero section */
     .shop-hero {
       position: relative;
-      background-image: url('images/model_sample.png');
-      background-size: cover;
+      background-image: url('images/model_back1.png');
+      background-size: 83%;
+      background-repeat: no-repeat;
       background-position: center;
       min-height: 85vh;
       display: flex;
@@ -53,6 +54,31 @@
       .hero-title { font-size: 2rem; }
       .hero-subtitle { font-size: 1rem; }
     }
+
+    /* --- Image Slider CSS for Hover Effect --- */
+    .product-image-slider {
+      /* Establishes positioning context for absolute images */
+      position: relative;
+      overflow: hidden; 
+      /* Ensures the container is tall enough, 4/3 aspect ratio */
+      padding-top: calc(3/4 * 100%); 
+    }
+    .product-image-slider img {
+      /* Places all images on top of each other */
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      
+      /* Initial state: hidden, use opacity for smooth fade */
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out; 
+    }
+    .product-image-slider img.active {
+      /* Visible state */
+      opacity: 1;
+    }
+    /* --- END Image Slider CSS --- */
   </style>
 </head>
 
@@ -68,6 +94,7 @@
           <a href="index.html" class="text-white hover:text-growth-green font-medium">Home</a>
           <a href="index.html#products" class="text-white hover:text-growth-green font-medium">Our Products</a>
           <a href="news.html" class="text-white hover:text-growth-green font-medium">News</a>
+          <a href="blog.html" class="text-white hover:text-growth-green font-medium">Blog</a>
           <a href="about.html" class="text-white hover:text-growth-green font-medium">About Us</a>
         </div>
         <div class="flex items-center space-x-4">
@@ -88,7 +115,7 @@
 
   <section class="shop-hero">
     <div class="hero-content">
-      <h1 class="hero-title">Nature's best-kept secret.</h1>
+      <h1 class="hero-title">Nature's best kept secret.</h1>
       <p class="hero-subtitle">Explore our premium range of sustainable products crafted from agricultural waste. From organic fertilizers that enrich your soil to natural skincare solutions that nourish your skin.</p>
       <a href="#products" class="hero-cta">
         Shop Our Skincare Products
@@ -100,34 +127,47 @@
   </section>
 
   <section id="products" class="scroll-mt-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <h2 class="text-3xl font-extrabold text-brand-dark mb-8">Order Now</h2>
+    <h2 class="text-3xl font-extrabold text-brand-dark mb-8 text-center">Order Now</h2>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
 
       <article class="relative rounded-2xl bg-[#F3F4F4] p-4 md:p-5 shadow-sm">
         <div class="flex items-center justify-between">
-          <span class="text-2xl font-extrabold tracking-tight text-brand-dark/80 lowercase">potash</span>
+          <span class="text-2xl font-extrabold tracking-tight text-brand-dark/80 lowercase">Skincare</span>
           <span class="px-3 py-1 rounded-full bg-white/70 text-[11px] font-semibold uppercase tracking-wide">Only at Cocoa Potash</span>
         </div>
 
-        <div class="mt-4 md:mt-6 rounded-xl bg-[#F3F4F4] aspect-[4/3] flex items-center justify-center">
+        <div class="product-image-slider mt-4 md:mt-6 rounded-xl bg-[#F3F4F4] flex items-center justify-center" data-product-id="paste-soap">
           <img
-            src="images/mockup_almost-removebg-preview.png"
-            alt="Organic Potash"
-            class="h-full w-auto max-h-[420px] object-contain drop-shadow"
-            loading="lazy">
-        </div>
+            src="images/paste_official.png"
+            alt="paste soap Image 1"
+            class="h-40 w-auto object-contain drop-shadow active"
+            loading="lazy"
+            data-slide-img="1">
+          <img
+            src="images/soap_model.png"
+            alt="paste soap Image 2"
+            class="h-56 w-auto object-contain drop-shadow" 
+            loading="lazy"
+            data-slide-img="2">
+          <img
+            src="images/paste_official.png" 
+            alt="paste soap Image 3"
+            class="h-40 w-auto object-contain drop-shadow"
+            loading="lazy"
+            data-slide-img="3">
+          </div>
 
         <div class="mt-6 flex items-start justify-between">
           <div>
             <div class="flex items-center text-xs text-gray-600 gap-1">
               <span>★★★★★</span>
-              <span>(46)</span>
+              <span>(34)</span>
             </div>
-            <h3 class="mt-1 font-semibold tracking-tight text-brand-dark">ORGANIC POTASH</h3>
-            <p class="text-sm text-gray-600">High-purity, eco-friendly K₂CO₃ for industrial and agricultural use.</p>
+            <h3 class="mt-1 font-semibold tracking-tight text-brand-dark">Paste Soap</h3>
+            <p class="text-sm text-gray-600">Gentle, sustainable, tough on dirt, kind to the planet.</p>
           </div>
-          <div class="text-sm font-semibold text-brand-dark">$45.00</div>
+          <div class="text-sm font-semibold text-brand-dark">GHS55.00</div>
         </div>
 
         <button
@@ -139,16 +179,23 @@
 
       <article class="relative rounded-2xl bg-[#F3F4F4] p-4 md:p-5 shadow-sm">
         <div class="flex items-center justify-between">
-          <span class="text-2xl font-extrabold tracking-tight text-brand-dark/80 lowercase">edit</span>
-          <span class="px-3 py-1 rounded-full bg-white/70 text-[11px] font-semibold uppercase tracking-wide">New</span>
+          <span class="text-2xl font-extrabold tracking-tight text-brand-dark/80 lowercase">Skincare</span>
+          <span class="px-3 py-1 rounded-full bg-white/70 text-[11px] font-semibold uppercase tracking-wide">Only at Cocoa Potash</span>
         </div>
 
-        <div class="mt-4 md:mt-6 rounded-xl bg-[#F3F4F4] aspect-[4/3] flex items-center justify-center">
+        <div class="product-image-slider mt-4 md:mt-6 rounded-xl bg-[#F3F4F4] flex items-center justify-center" data-product-id="shower-gel">
           <img
-            src="images/cocoboost_mockup_dud.png"
-            alt="CocoBoost Organic Fertilizer"
-            class="h-full w-auto max-h-[420px] object-contain drop-shadow"
-            loading="lazy">
+            src="images/SG_MODEL2.png"
+            alt="shower gel 1"
+            class="h-64 w-auto object-contain drop-shadow active"
+            loading="lazy"
+            data-slide-img="1">
+          <img
+            src="images/showergel_main.png" 
+            alt="shower gel 2"
+            class="h-64 w-auto object-contain drop-shadow"
+            loading="lazy"
+            data-slide-img="2">
         </div>
 
         <div class="mt-6 flex items-start justify-between">
@@ -157,10 +204,10 @@
               <span>★★★★★</span>
               <span>(16)</span>
             </div>
-            <h3 class="mt-1 font-semibold tracking-tight text-brand-dark">COCOBOOST ORGANIC FERTILIZER</h3>
-            <p class="text-sm text-gray-600">Locally made organic fertilizer that improves soil health and yields.</p>
+            <h3 class="mt-1 font-semibold tracking-tight text-brand-dark">Shower gel</h3>
+            <p class="text-sm text-gray-600">Locally made organic shower gel for refreshed, soft skin.</p>
           </div>
-          <div class="text-sm font-semibold text-brand-dark">$30.00</div>
+          <div class="text-sm font-semibold text-brand-dark">GHS45.00</div>
         </div>
 
         <button
@@ -172,28 +219,35 @@
 
       <article class="relative rounded-2xl bg-[#F3F4F4] p-4 md:p-5 shadow-sm">
         <div class="flex items-center justify-between">
-          <span class="text-2xl font-extrabold tracking-tight text-brand-dark/80 lowercase">prep</span>
-          <span class="px-3 py-1 rounded-full bg-white/70 text-[11px] font-semibold uppercase tracking-wide">Best Seller</span>
+          <span class="text-2xl font-extrabold tracking-tight text-brand-dark/80 lowercase">Skincare</span>
+          <span class="px-3 py-1 rounded-full bg-white/70 text-[11px] font-semibold uppercase tracking-wide">ONLY AT COCOA POTASH</span>
         </div>
 
-        <div class="mt-4 md:mt-6 rounded-xl bg-[#F3F4F4] aspect-[4/3] flex items-center justify-center">
+        <div class="product-image-slider mt-4 md:mt-6 rounded-xl bg-[#F3F4F4] flex items-center justify-center" data-product-id="bar-soap">
           <img
-            src="images/model_sample.png"
-            alt="African Black Soap"
-            class="h-full w-auto max-h-[420px] object-contain drop-shadow"
-            loading="lazy">
+            src="images/barsoap_shop.png"
+            alt="African Black Soap 1"
+            class="h-40 w-auto object-contain drop-shadow active"
+            loading="lazy"
+            data-slide-img="1">
+          <img
+            src="images/barsoap_mm.png" 
+            alt="African Black Soap 2"
+            class="h-80 w-auto object-contain drop-shadow"
+            loading="lazy"
+            data-slide-img="2">
         </div>
 
         <div class="mt-6 flex items-start justify-between">
           <div>
             <div class="flex items-center text-xs text-gray-600 gap-1">
               <span>★★★★★</span>
-              <span>(5,785)</span>
+              <span>(25)</span>
             </div>
-            <h3 class="mt-1 font-semibold tracking-tight text-brand-dark">AFRICAN BLACK SOAP</h3>
+            <h3 class="mt-1 font-semibold tracking-tight text-brand-dark">Bar soap</h3>
             <p class="text-sm text-gray-600">Handcrafted from cocoa pod ash and natural oils for deep, gentle cleansing.</p>
           </div>
-          <div class="text-sm font-semibold text-brand-dark">$10.00</div>
+          <div class="text-sm font-semibold text-brand-dark">GHS45.00</div>
         </div>
 
         <button
@@ -313,7 +367,52 @@
     </div>
   </footer>
 
+  <div id="cart-overlay" class="fixed inset-0 bg-black bg-opacity-50 hidden z-40"></div>
+
   <script>
+    // --- Image Slider Logic ---
+    document.querySelectorAll('.product-image-slider').forEach(container => {
+      const slides = container.querySelectorAll('img');
+      let currentIndex = 0;
+      let intervalId;
+      const SLIDE_INTERVAL = 1500; // Time in ms to change the slide
+
+      const showSlide = (index) => {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[index].classList.add('active');
+      };
+
+      const nextSlide = () => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
+      };
+
+      const startSlideShow = () => {
+        // Reset to the first image when starting
+        currentIndex = 0;
+        showSlide(currentIndex);
+        // Only start the timer if there's more than one slide
+        if (slides.length > 1) {
+          intervalId = setInterval(nextSlide, SLIDE_INTERVAL);
+        }
+      };
+
+      const stopSlideShow = () => {
+        clearInterval(intervalId);
+        // Revert to the first image when hover stops
+        currentIndex = 0;
+        showSlide(currentIndex);
+      };
+
+      // Initial state: ensure only the first slide is visible
+      showSlide(0);
+
+      // Add event listeners to the product card container
+      container.closest('article').addEventListener('mouseenter', startSlideShow);
+      container.closest('article').addEventListener('mouseleave', stopSlideShow);
+    });
+
+    // --- Cart Logic (Original Code) ---
     const cartBtn = document.getElementById('cart-btn');
     const cartOverlay = document.getElementById('cart-overlay');
     let cartPanel = document.getElementById('cart-panel');
