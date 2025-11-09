@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog - Cocoa Potash: Waste to Wealth Insights</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <style>
+    body {
+      font-family: "Inter", sans-serif;
+      background-color: #f7f7f7; /* Light background for the blog page */
+      overflow-x: hidden; /* Prevent horizontal scroll when modal is off-screen */
+    }
+
+    /* Brand palette */
+    .bg-brand-dark {
+      background-color: #111827;
+    }
+    .text-brand-dark {
+      color: #111827;
+    }
+    .bg-growth-green {
+      background-color: #2e8b57;
+    }
+    .text-growth-green {
+      color: #2e8b57;
+    }
+    .hover\:bg-brand-dark-light:hover {
+      background-color: #374151;
+    }
+    .hover\:bg-growth-green-dark:hover {
+      background-color: #246d45;
+    }
+
+    /* Custom styles for the blog template */
+    .blog-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .blog-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    }
+    .pagination-link {
+        transition: background-color 0.2s;
+    }
+
+    /* --- Modal/Slide-Over Animation Styles --- */
+    .slide-over-modal {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        max-width: 100vw;
+        z-index: 60; /* Above the header */
+        background-color: #f7f7f7;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+        transform: translateX(100%); /* Start off-screen to the right */
+        transition: transform 0.4s ease-out;
+        overflow-y: auto; /* Scrollable content inside modal */
+        /* Rounded corner on the left for attractive view */
+        border-top-left-radius: 1.5rem; 
+        border-bottom-left-radius: 1.5rem;
+    }
+
+    /* For large screens, reduce modal width for better context */
+    @media (min-width: 1024px) {
+        .slide-over-modal {
+            max-width: 60%; 
+        }
+    }
+    @media (min-width: 1280px) {
+        .slide-over-modal {
+            max-width: 50%; 
+        }
+    }
+
+    .slide-over-modal.open {
+        transform: translateX(0); /* Slide into view */
+    }
+    
+    .overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 55; /* Between header and modal */
+        background-color: rgba(0, 0, 0, 0.5);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.4s ease-out;
+    }
+
+    .overlay.open {
+        opacity: 1;
+        visibility: visible;
+    }
+    
+    /* Ensure body scrolling is disabled when modal is open */
+    .modal-open-body {
+        overflow: hidden;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="overlay" id="blog-overlay" onclick="closeArticle()"></div>
+
+  <div class="slide-over-modal" id="featured-article-modal">
+    <div class="sticky top-0 bg-white p-6 shadow-md z-10 flex justify-between items-center border-b border-gray-200">
+        <h2 class="text-xl font-bold text-brand-dark">Featured Article</h2>
+        <button onclick="closeArticle()" class="text-gray-500 hover:text-brand-dark transition-colors p-2 rounded-full hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-growth-green">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+    </div>
+
+    <div class="p-6 md:p-10 lg:p-12">
+        <article id="article-content">
+            <div id="cocoa-husk-article">
+                <p class="text-sm font-semibold text-growth-green uppercase tracking-wider mb-4">Featured | Sustainability | August 2025</p>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-brand-dark leading-tight mb-8">
+                    The Cocoa Husk Revolution: How Waste is Becoming Africa's New Gold
+                </h1>
+                
+                <img class="w-full rounded-xl mb-8 shadow-lg" src="images/farmer1.jpg" alt="A Ghanaian farmer with cocoa pod husks">
+
+                <div class="prose max-w-none text-gray-700 space-y-6">
+                    <p class="text-xl font-medium text-brand-dark">
+                        For centuries, the cocoa pod has fueled the world's chocolate addiction, but what about the shell it leaves behind? In Ghana and across West Africa, this agricultural residue the cocoa husk has always been a waste product, often burned, releasing harmful emissions and contributing nothing back to the struggling soil.
+                    </p>
+
+                    <p>
+                        At Cocoa Potash, we saw not waste, but wealth. We recognized the untapped potential within this abundant, natural biomass. Our vision wasn't just about recycling; it was about initiating a powerful Circular Economy that elevates farmers, protects the environment, and supplies global industry with a clean, ethical source of potash.
+                    </p>
+
+                    <h2>The Innovation: Clean, High-Purity Potash (K₂CO₃)</h2>
+                    <p>
+                        The core of the Cocoa Husk Revolution lies in our proprietary thermal conversion process. Instead of simple open air burning, which is inefficient and polluting, we employ a controlled, low carbon process that meticulously transforms the husks into a pure, valuable product: Organic Potash (Potassium Carbonate).
+                    </p>
+                    <p>
+                        For Industry: Our potash achieves 96% purity, making it a premium, contaminant free input for pharmaceuticals, food, and high end personal care (like African Black Soap). This offers international companies an essential, ESG compliant raw material with full traceability from a sustainable source.
+                    </p>
+                    <p>
+                        For Farms (CocoBoost): The mineral rich ash byproduct, packed with potassium and other micronutrients, is reformulated into our CocoBoost Organic Fertilizer. This isn't imported chemical fertilizer; it's a locally made soil rejuvenator that is up to 29% more affordable and has been proven to increase crop yields by over 40%.
+                    </p>
+
+                    <h2>Empowering Communities from the Ground Up</h2>
+                    <p>
+                        The true gold in this revolution is the socio economic impact. Our process requires a dedicated supply chain, which we built by partnering directly with over 1,000 smallholder farmers.
+                    </p>
+                    <p>
+                        By purchasing the waste they once discarded, we provide farmers with an entirely new, consistent revenue stream, stabilizing their livelihoods beyond just the cocoa season. Crucially, our waste collection network heavily engages rural women, empowering over 1,300 women with flexible income opportunities that drive financial stability in their communities.
+                    </p>
+
+                    <h2>Looking Ahead: A Sustainable Future for Africa</h2>
+                    <p>
+                        The Cocoa Husk Revolution is more than a business model; it’s a blueprint for sustainable industrialization in Africa. It proves that environmental responsibility and economic growth are not mutually exclusive. By treating waste as a resource, Cocoa Potash is not just producing potash; we are cultivating wealth, regenerative farming practices, and a cleaner, more prosperous future for the communities we serve.
+                    </p>
+                    <p class="pt-4 italic font-medium border-t border-gray-200">
+                        Interested in partnering with us for bulk organic potash or implementing CocoBoost in your fields? Contact our team today.
+                    </p>
+                </div>
+            </div>
+
+            </article>
+    </div>
+  </div>
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-4">
+        <a href="index.html" class="flex items-center space-x-2">
+          <img
+            src="images/cocoa_potash_blk.png"
+            alt="Cocoa Potash Logo"
+            class="h-10 w-auto"
+          />
+        </a>
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="index.html" class="text-gray-600 hover:text-growth-green font-medium">Home</a>
+          <a href="index.html#products" class="text-gray-600 hover:text-growth-green font-medium">Our Products</a>
+          <a href="news.html" class="text-gray-600 hover:text-growth-green font-medium">News</a>
+          <a href="blog.html" class="text-growth-green font-medium">Blog</a>
+          <a href="about.html" class="text-gray-600 hover:text-growth-green font-medium">About Us</a>
+        </div>
+        <div class="hidden md:block">
+          <a
+            href="request-sample.html"
+            class="bg-brand-dark text-white font-bold py-2 px-5 rounded-lg shadow-lg hover:bg-brand-dark-light transition-colors duration-300"
+          >
+            Contact Us
+          </a>
+        </div>
+        <div class="md:hidden">
+          <button id="mobile-menu-button" class="text-gray-700 focus:outline-none">
+            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div id="mobile-menu" class="hidden md:hidden pb-4">
+        <a href="index.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Home</a>
+        <a href="index.html#products" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Our Products</a>
+        <a href="news.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">News</a>
+        <a href="blog.html" class="block py-2 px-4 text-sm bg-gray-100 text-growth-green">Blog</a>
+        <a href="about.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">About Us</a>
+        <a href="#contact" class="block mt-2 text-center bg-brand-dark text-white font-bold py-2 px-5 rounded-lg">Contact Us</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start mb-20">
+        <div class="lg:col-span-6 rounded-xl overflow-hidden shadow-xl">
+            <img class="w-full h-80 object-cover" src="images/farmer1.jpg" alt="Farmers gathering cocoa pod husks" />
+        </div>
+        
+        <div class="lg:col-span-6 flex flex-col justify-center h-full">
+            <p class="text-sm font-semibold text-growth-green uppercase tracking-wider mb-2">Featured | Sustainability</p>
+            <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark leading-tight mb-4">
+                The Cocoa Husk Revolution: How Waste is Becoming Africa's New Gold
+            </h2>
+            <p class="text-lg text-gray-700 mb-6">
+                Discover the innovative thermal process that converts discarded cocoa pod husks into high-purity organic potash and affordable fertilizer, simultaneously slashing agricultural emissions and empowering local farmers.
+            </p>
+            <button onclick="openArticle('cocoa-husk-article', 'The Cocoa Husk Revolution')" class="flex items-center text-growth-green font-bold group">
+                Read the Full Story 
+                <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+            </button>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12">
+
+        <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+            <img class="w-full h-52 object-cover" src="images/organic potash.jpeg" alt="Pile of high-purity organic potash">
+            <div class="p-6">
+                <p class="text-sm font-semibold text-gray-500 mb-1">ESG | Industry</p>
+                <h3 class="text-xl font-bold text-brand-dark mb-3 leading-snug">
+                    Why Organic Potash is the ESG-Compliant Input Global Manufacturers Need
+                </h3>
+                <p class="text-gray-600 text-base mb-4">
+                    Examine the traceability and low-carbon footprint of our organic K₂CO₃, positioning it as the responsible choice for pharmaceuticals, food, and biotech.
+                </p>
+                <button onclick="openArticle('placeholder', 'Why Organic Potash is the ESG-Compliant Input Global Manufacturers Need')" class="text-growth-green font-medium hover:underline">Read Article &rarr;</button>
+            </div>
+        </div>
+
+        <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+            <img class="w-full h-52 object-cover" src="images/happy man.jpeg" alt="A farmer in a healthy crop field">
+            <div class="p-6">
+                <p class="text-sm font-semibold text-gray-500 mb-1">Agriculture | Innovation</p>
+                <h3 class="text-xl font-bold text-brand-dark mb-3 leading-snug">
+                    40% Yield Increase: The Power of CocoBoost in Ghanaian Farms
+                </h3>
+                <p class="text-gray-600 text-base mb-4">
+                    Learn about our farmer training programs and the proven impact of our locally-made, affordable organic fertilizer on crop health and productivity.
+                </p>
+                <button onclick="openArticle('placeholder', '40% Yield Increase: The Power of CocoBoost in Ghanaian Farms')" class="text-growth-green font-medium hover:underline">Read Article &rarr;</button>
+            </div>
+        </div>
+
+        <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+            <img class="w-full h-52 object-cover" src="images/farmer_workshop.jpeg" alt="Group of women working in a community">
+            <div class="p-6">
+                <p class="text-sm font-semibold text-gray-500 mb-1">Community | Empowerment</p>
+                <h3 class="text-xl font-bold text-brand-dark mb-3 leading-snug">
+                    Empowering Women: Cocoa Potash’s Role in Rural Livelihoods
+                </h3>
+                <p class="text-gray-600 text-base mb-4">
+                    Our waste collection network creates new revenue streams for over 1,300 women, driving economic growth at the grassroots level.
+                </p>
+                <button onclick="openArticle('placeholder', 'Empowering Women: Cocoa Potash’s Role in Rural Livelihoods')" class="text-growth-green font-medium hover:underline">Read Article &rarr;</button>
+            </div>
+        </div>
+
+        <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+            <img class="w-full h-52 object-cover" src="images/soap model.jpeg" alt="African Black Soap product">
+            <div class="p-6">
+                <p class="text-sm font-semibold text-gray-500 mb-1">Products | Personal Care</p>
+                <h3 class="text-xl font-bold text-brand-dark mb-3 leading-snug">
+                    The Ancient Secret: Unveiling the Benefits of African Black Soap
+                </h3>
+                <p class="text-gray-600 text-base mb-4">
+                    Dive into the history and dermatological advantages of using natural black soap made with our organic potash.
+                </p>
+                <button onclick="openArticle('placeholder', 'The Ancient Secret: Unveiling the Benefits of African Black Soap')" class="text-growth-green font-medium hover:underline">Read Article &rarr;</button>
+            </div>
+        </div>
+
+        <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+            <img class="w-full h-52 object-cover" src="images/happy woman.jpeg" alt="Diagram showing circular economy model">
+            <div class="p-6">
+                <p class="text-sm font-semibold text-gray-500 mb-1">Sustainability | Policy</p>
+                <h3 class="text-xl font-bold text-brand-dark mb-3 leading-snug">
+                    Closing the Loop: Cocoa Potash’s Model for Africa’s Circular Economy
+                </h3>
+                <p class="text-gray-600 text-base mb-4">
+                    A deep dive into how converting agricultural residue transforms linear waste streams into a closed-loop system.
+                </p>
+                <button onclick="openArticle('placeholder', 'Closing the Loop: Cocoa Potash’s Model for Africa’s Circular Economy')" class="text-growth-green font-medium hover:underline">Read Article &rarr;</button>
+            </div>
+        </div>
+
+        <div class="blog-card bg-white rounded-xl overflow-hidden shadow-lg">
+            <img class="w-full h-52 object-cover" src="images/fertilizer.jpeg" alt="Industrial plant setting">
+            <div class="p-6">
+                <p class="text-sm font-semibold text-gray-500 mb-1">Technology | Innovation</p>
+                <h3 class="text-xl font-bold text-brand-dark mb-3 leading-snug">
+                    From Ash to Potash: The Clean Technology Behind High-Purity K₂CO₃
+                </h3>
+                <p class="text-gray-600 text-base mb-4">
+                    A look at the proprietary technology we use to ensure our potash meets the stringent quality requirements of global industries.
+                </p>
+                <button onclick="openArticle('placeholder', 'From Ash to Potash: The Clean Technology Behind High-Purity K₂CO₃')" class="text-growth-green font-medium hover:underline">Read Article &rarr;</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="flex justify-center items-center mt-20">
+        <nav class="flex items-center space-x-2">
+            <a href="#" class="p-3 text-sm font-semibold text-gray-500 hover:text-brand-dark">
+                &larr; Prev
+            </a>
+            
+            <a href="#" class="p-3 w-10 text-center text-sm font-bold text-white bg-growth-green rounded-lg pagination-link">1</a>
+            <a href="#" class="p-3 w-10 text-center text-sm font-semibold text-gray-700 rounded-lg hover:bg-gray-200 pagination-link">2</a>
+            <a href="#" class="p-3 w-10 text-center text-sm font-semibold text-gray-700 rounded-lg hover:bg-gray-200 pagination-link">3</a>
+            <span class="p-3 text-sm text-gray-500">...</span>
+            <a href="#" class="p-3 w-10 text-center text-sm font-semibold text-gray-700 rounded-lg hover:bg-gray-200 pagination-link">10</a>
+
+            <a href="#" class="p-3 text-sm font-semibold text-gray-500 hover:text-brand-dark">
+                Next &rarr;
+            </a>
+        </nav>
+    </div>
+
+  </main>
+
+  <footer id="contact" class="bg-brand-dark text-white">
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="md:col-span-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <img src="images/logo_white_large.png" alt="Cocoa Potash Logo" class="h-10 w-auto">
+                </a>
+                <p class="mt-4 text-gray-400 max-w-xs">Pioneering Africa's potash economy by transforming agricultural waste into sustainable wealth for farms and industries.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold tracking-wider uppercase">Links</h3>
+                <ul class="mt-4 space-y-2">
+                    <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+                    <li><a href="index.html#products" class="text-gray-400 hover:text-white">Products</a></li>
+                    <li><a href="news.html" class="text-gray-400 hover:text-white">News</a></li>
+                    <li><a href="blog.html" class="text-white font-bold">Blog</a></li>
+                    <li><a href="request-sample.html" class="text-gray-400 hover:text-white">Order Here</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold tracking-wider uppercase">Get in Touch</h3>
+                <p class="mt-4 text-gray-400">Have a question or want to partner with us? We’d love to hear from you.</p>
+                <ul class="mt-4 space-y-2 text-gray-400">
+                    <li>Cocoa Potash Limited</li>
+                    <li>P. O. Box 23, Bekwai Ashanti Region</li>
+                    <li class="hover:text-white"><a href="mailto:info@cocoapotash.com">Email: info@cocoapotash.com</a></li>
+                    <li class="hover:text-white"><a href="tel:+23355704707">+233557848787</a> / <a href="tel:+233505554040">+233505554040</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-12 border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-between items-center">
+            <p class="text-gray-500">&copy; 2025 Cocoa Potash Limited. All Rights Reserved.</p>
+            <div class="flex space-x-6 mt-4 sm:mt-0">
+                
+                 <a href="https://www.linkedin.com/company/81955507" target="_blank" class="text-gray-400 hover:text-white">
+                   <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.1c.5-.95 1.75-2.2 3.6-2.2 3.85 0 4.6 2.5 4.6 5.8V24h-4v-8.6c0-2.05-.05-4.7-2.85-4.7-2.85 0-3.3 2.25-3.3 4.55V24h-4V8z" /></svg>
+                 </a>
+
+            </div>
+        </div>
+    </div>
+  </footer>
+
+  <script>
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const modal = document.getElementById('featured-article-modal');
+    const overlay = document.getElementById('blog-overlay');
+    const articleContentContainer = document.getElementById('article-content');
+
+    // Mobile menu toggle (Existing function)
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+    
+    // --- Modal Functions ---
+
+    // Object to hold content for future articles (for the placeholder buttons)
+    const allArticles = {
+        'cocoa-husk-article': document.getElementById('cocoa-husk-article').innerHTML,
+        // When you draft new articles, add their content blocks here:
+        'placeholder': '<h2>Coming Soon!</h2><p>The full story for this article is being finalized. Check back soon for more insights into our mission!</p><p class="pt-4 italic text-gray-500">Article Title: </p>' 
+    };
+
+    // Store the HTML inside the modal for the featured article (to be moved when clicked)
+    // We only move the content when the modal is opened.
+    document.getElementById('cocoa-husk-article').remove(); 
+    articleContentContainer.innerHTML = ''; // Clear the container 
+
+    function openArticle(articleId, title) {
+        // 1. Load Content
+        // Set the content of the article modal.
+        // If it's a placeholder, add the title to the placeholder text.
+        let content = allArticles[articleId];
+        if (articleId === 'placeholder') {
+             content = allArticles['placeholder'] + ' ' + title;
+        }
+        articleContentContainer.innerHTML = content;
+        
+        // 2. Animate and Open
+        modal.classList.add('open');
+        overlay.classList.add('open');
+        document.body.classList.add('modal-open-body'); // Disable body scroll
+        
+        // Ensure the modal scrolls to the top
+        modal.scrollTo(0, 0);
+        
+        // 3. Update Modal Header Title
+        modal.querySelector('h2').textContent = 'Article: ' + title;
+    }
+
+    function closeArticle() {
+        modal.classList.remove('open');
+        overlay.classList.remove('open');
+        document.body.classList.remove('modal-open-body'); // Re-enable body scroll
+
+        // Optional: clear content after closing for performance/cleanup
+        // articleContentContainer.innerHTML = '';
+        // If you keep the content, ensure to reset the title/scroll when reopening
+    }
+    
+    // Make sure the Featured Article link uses the correct function
+    // The featured link is a <button> in the HTML above, so it uses onclick.
+
+  </script>
+</body>
+</html>
