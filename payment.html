@@ -13,97 +13,185 @@
     .bg-brand-dark { background-color: #111827; }
     .bg-growth-green { background-color: #2E8B57; }
     .hover\:bg-growth-green-dark:hover { background-color: #246d45; }
-    .payment-logo {
-      filter: grayscale(100%);
-      transition: filter 0.3s ease;
+    .payment-logo { filter: grayscale(100%); transition: filter 0.3s ease; }
+    .payment-logo:hover { filter: grayscale(0%); }
+    /* Utility class to hide elements */
+    .hidden { display: none !important; }
+
+    /* Modal Styling */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.75);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 1000;
     }
-    .payment-logo:hover {
-      filter: grayscale(0%);
+    /* Ensure body content is hidden on load until location is selected */
+    .content-hidden > header, .content-hidden > main, .content-hidden > footer {
+        visibility: hidden;
+    }
+    
+    /* NEW: Coming Soon Overlay Styles */
+    #coming-soon-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Black semi-transparent background */
+        backdrop-filter: blur(8px); /* Black blur effect on content behind */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 999; /* Below the initial selection modal, above main content */
+        color: white;
+        text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    }
+
+    /* Hourglass Animation */
+    @keyframes spin-flip {
+        0% { transform: rotate(0deg); }
+        50% { transform: rotate(180deg); }
+        100% { transform: rotate(360deg); }
+    }
+    .hourglass-animated {
+        font-size: 4rem;
+        animation: spin-flip 2s infinite linear;
     }
   </style>
+
+  <script src="https://js.paystack.co/v1/inline.js"></script>
 </head>
 
-<body class="bg-gray-50">
-  <!-- Header -->
+<body class="bg-gray-50 content-hidden">
+  
+  <div id="coming-soon-overlay" class="hidden">
+      <div class="hourglass-animated">⏳</div>
+      <p class="text-3xl font-bold mt-4">Coming soon</p>
+  </div>
 
+  <div id="country-selection-modal" class="modal-overlay">
+    <div class="bg-white rounded-2xl shadow-xl p-10 w-full max-w-md text-center">
+        <img src="images/cocoa_potash_blk.png" alt="Cocoa Potash Logo" class="h-12 w-auto mx-auto mb-8">
+        
+        <h1 class="text-2xl font-bold text-brand-dark mb-6">Select your location</h1>
+        
+        <div class="space-y-4">
+          
+          <button id="select-ghana" data-location="ghana"
+            class="country-select-btn block w-full bg-growth-green text-white font-semibold py-4 rounded-lg hover:bg-growth-green-dark transition transform hover:scale-[1.01]">
+            Ghana (GHS)
+          </button>
+
+          <button id="select-international" data-location="international"
+            class="country-select-btn block w-full bg-black text-white font-semibold py-4 rounded-lg hover:opacity-90 transition transform hover:scale-[1.01]">
+            USA
+          </button>
+
+        </div>
+        
+        <p class="text-xs text-gray-400 mt-6">Currenlty avaialble in Ghana and USA. Country not listed? Contact us</p>
+    </div>
+  </div>
   <header class="bg-white shadow-md sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <a href="index.html" class="flex items-center space-x-2">
         <img src="images/cocoa_potash_blk.png" alt="Cocoa Potash Logo" class="h-10 w-auto">
       </a>
-      <h2 class="text-lg font-semibold text-gray-700">Secure Payment</h2>
+      <h2 class="text-lg font-semibold text-gray-700">Secure Payment Summary</h2>
     </div>
   </header>
 
-  <!-- Main Payment Section -->
   <main class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-2 gap-10">
-    <!-- Left: Payment Form -->
     <div class="bg-white rounded-2xl shadow-md p-8">
-      <h2 class="text-2xl font-bold text-brand-dark mb-6">Checkout</h2>
+      <h2 class="text-2xl font-bold text-brand-dark mb-6">Check out</h2>
 
-      <!-- PayPal Checkout + Payment Logos Grid -->
-      <div class="mb-8">
-        <div id="paypal-button-container" class="mb-6"></div>
-        
-        <!-- Payment Logos Grid -->
-        <div class="grid grid-cols-3 sm:grid-cols-6 gap-6 items-center justify-items-center">
-          <img src="images/paypal.png" alt="PayPal" class="h-10 w-auto payment-logo">
-          <img src="images/visacard.png" alt="Visa" class="h-10 w-auto payment-logo">
-          <img src="images/mastercard.png" alt="MasterCard" class="h-10 w-auto payment-logo">
-          <img src="images/momo.jpeg" alt="MTN MoMo" class="h-10 w-auto payment-logo">
-          <img src="images/banktranser.png" alt="AirtelTigo" class="h-10 w-auto payment-logo">
+      <div id="payment-options-container" class="mb-8">
+        <p id="payment-method-header" class="text-center text-lg font-medium text-gray-700 mb-4 hidden"></p>
+        <div id="logos-container" class="grid grid-cols-3 sm:grid-cols-4 gap-6 items-center justify-items-center">
+              <img src="images/visacard.png" alt="Visa" class="h-10 w-auto payment-logo">
+              <img src="images/mastercard.png" alt="MasterCard" class="h-10 w-auto payment-logo">
+              <img src="images/momo.jpeg" alt="MTN MoMo" class="h-10 w-auto payment-logo">
+              <img src="images/banktranser.png" alt="AirtelTigo" class="h-10 w-auto payment-logo">
         </div>
       </div>
 
       <hr class="my-6">
+      
+      <h3 class="text-lg font-semibold text-gray-700 mb-2">Full Name *</h3>
+      <div class="flex space-x-4 mb-6">
+          <input id="first-name" type="text" placeholder="First Name" required
+              class="w-1/2 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-growth-green outline-none">
+          <input id="last-name" type="text" placeholder="Last Name" required
+              class="w-1/2 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-growth-green outline-none">
+      </div>
+      
+      <h3 class="text-lg font-semibold text-gray-700 mb-2">Contact email *</h3>
+      <input id="contact-email" type="email" placeholder="Email for payment receipt" required
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-growth-green outline-none mb-6">
+      
+      <h3 class="text-lg font-semibold text-gray-700 mb-2">Phone Number *</h3>
+      <input id="contact-phone" type="tel" placeholder="Phone number for delivery" required
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-growth-green outline-none mb-6">
+      
+      <h3 class="text-lg font-semibold text-gray-700 mb-2">Shipping Address *</h3>
+      <textarea id="shipping-address" placeholder="Full delivery address" rows="3" required
+          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-growth-green outline-none mb-6 resize-none"></textarea>
 
-      <!-- Contact and Delivery -->
-      <form id="manual-payment-form" class="space-y-4">
-        <h3 class="text-lg font-semibold text-gray-700 mb-2">Contact</h3>
-        <input type="email" placeholder="Email or mobile number" required
-          class="w-full border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-growth-green outline-none">
+      <div id="payment-action-area">
+          <button id="proceed-to-payment-btn"
+            class="w-full bg-growth-green text-white font-semibold py-4 rounded-lg hover:bg-growth-green-dark transition">
+            Proceed to Payment
+          </button>
+      </div>
+      
+      <div class="mt-4 text-center">
+        <button id="change-location-btn" class="text-sm text-gray-500 hover:text-growth-green">Change location/currency</button>
+      </div>
 
-        <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Delivery Details</h3>
-        <div class="grid grid-cols-2 gap-3">
-          <input type="text" placeholder="First Name" required class="border border-gray-300 rounded-lg px-4 py-2">
-          <input type="text" placeholder="Last Name" required class="border border-gray-300 rounded-lg px-4 py-2">
-        </div>
-        <input type="text" placeholder="Address" required class="w-full border border-gray-300 rounded-lg px-4 py-2">
-        <div class="grid grid-cols-3 gap-3">
-          <input type="text" placeholder="City" required class="border border-gray-300 rounded-lg px-4 py-2">
-          <input type="text" placeholder="Region/State" required class="border border-gray-300 rounded-lg px-4 py-2">
-          <input type="text" placeholder="Postal Code" required class="border border-gray-300 rounded-lg px-4 py-2">
-        </div>
-
-        <h3 class="text-lg font-semibold text-gray-700 mt-6 mb-2">Payment Method</h3>
-        <select id="payment-method" class="w-full border border-gray-300 rounded-lg px-4 py-2">
-          <option value="card">Credit / Debit Card</option>
-          <option value="mobile-money">Mobile Money</option>
-          <option value="bank-transfer">Bank Transfer</option>
-        </select>
-
-        <button type="submit"
-          class="w-full bg-growth-green text-white font-semibold py-3 rounded-lg hover:bg-growth-green-dark transition mt-4">
-          Confirm Payment
-        </button>
-      </form>
+      <div id="gateway-instructions" class="mt-4 space-y-3">
+      </div>
     </div>
-
-    <!-- Right: Order Summary -->
     <div class="bg-white rounded-2xl shadow-md p-8">
       <h2 class="text-2xl font-bold text-brand-dark mb-6">Order Summary</h2>
+      
       <div id="order-items" class="space-y-4">
         <p class="text-gray-600">Loading your cart...</p>
       </div>
+
       <hr class="my-4">
+      
+      <div id="price-breakdown" class="space-y-2 text-gray-700">
+        <div class="flex justify-between">
+            <span id="items-label">Items</span> 
+            <span id="subtotal-price">$0.00</span>
+        </div>
+        <div class="flex justify-between">
+            <span>Shipping Fee</span>
+            <span id="shipping-fee">$0.00</span>
+        </div>
+        <div class="flex justify-between">
+            <span>Tax Fee</span>
+            <span id="tax-fee">$0.00</span>
+        </div>
+      </div>
+
+      <hr class="my-4">
+      
       <div class="flex justify-between font-semibold text-lg">
-        <span>Total</span>
+        <span>Order Total</span> 
         <span id="order-total">$0.00</span>
       </div>
+      
     </div>
   </main>
 
-  <!-- bottom footer -->
   <footer id="contact" class="bg-brand-dark text-white">
     <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -136,82 +224,335 @@
       </div>
       <div class="mt-12 border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-between items-center">
         <p class="text-gray-500">&copy; 2025 Cocoa Potash Limited. All Rights Reserved.</p>
-        <div class="flex space-x-6 mt-4 sm:mt-0">
-          <a href="https://www.linkedin.com/company/81955507" target="_blank" class="text-gray-400 hover:text-white">
-            <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.1c.5-.95 1.75-2.2 3.6-2.2 3.85 0 4.6 2.5 4.6 5.8V24h-4v-8.6c0-2.05-.05-4.7-2.85-4.7-2.85 0-3.3 2.25-3.3 4.55V24h-4V8z" />
-            </svg>
-          </a>
-        </div>
       </div>
     </div>
   </footer>
 
-  <!-- PayPal SDK -->
   <script src="https://www.paypal.com/sdk/js?client-id=YOUR_CLIENT_ID&currency=USD"></script>
 
   <script>
-    // Load cart from localStorage (from previous checkout)
+    // ** Get/Set Location Logic **
+    const SESSION_KEY = 'userLocation';
+    let userLocation = sessionStorage.getItem(SESSION_KEY);
+    const modal = document.getElementById('country-selection-modal');
+    
+    // -------- Cart + totals --------
     const orderContainer = document.getElementById('order-items');
     const orderTotal = document.getElementById('order-total');
-    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    
+    // Breakdown elements
+    const itemsLabelEl = document.getElementById('items-label');
+    const subtotalPriceEl = document.getElementById('subtotal-price');
+    const shippingFeeEl = document.getElementById('shipping-fee');
+    const taxFeeEl = document.getElementById('tax-fee');
+    
+    // Input elements
+    const firstNameInput = document.getElementById('first-name');
+    const lastNameInput = document.getElementById('last-name');
+    const emailInput = document.getElementById('contact-email');
+    const phoneInput = document.getElementById('contact-phone');
+    const addressInput = document.getElementById('shipping-address');
+    const proceedBtn = document.getElementById('proceed-to-payment-btn');
+    const comingSoonOverlay = document.getElementById('coming-soon-overlay'); // NEW
 
-    function renderOrder() {
+
+    // Constants for calculation (PLACEHOLDERS)
+    const EXCHANGE_RATE_GHS_PER_USD = 15.00; // approximate
+    const SHIPPING_FEE = 0; // Fixed USD shipping fee
+    const TAX_RATE = 0.05; // 5% tax rate
+
+    // Using dummy cart data 
+    const cart = JSON.parse(localStorage.getItem('cart') || '[{"name": "Organic Potash", "qty": 1, "price": 45.00, "img": "images/product.png"}]');
+
+    function renderOrder(currency) {
       orderContainer.innerHTML = '';
-      let total = 0;
+      
+      let subtotalUSD = 0; 
+      let totalItems = 0; 
+      // Determine the rate for item list display based on the requested currency
+      const symbol = currency === 'GHS' ? 'GHS ' : '$';
+      const rate = currency === 'GHS' ? EXCHANGE_RATE_GHS_PER_USD : 1;
+      
       cart.forEach(item => {
-        total += item.price * item.qty;
+        const itemTotalUSD = item.price * item.qty;
+        subtotalUSD += itemTotalUSD;
+        totalItems += item.qty; 
+        
+        const itemTotalDisplay = itemTotalUSD * rate; // Convert for display
+        
         const div = document.createElement('div');
         div.classList.add('flex', 'justify-between', 'items-center');
         div.innerHTML = `
           <div class="flex items-center space-x-3">
-            <img src="${item.img}" class="h-12 w-12 object-contain rounded" alt="${item.name}">
+            <img src="${item.img || 'images/product.png'}" class="h-12 w-12 object-contain rounded" alt="${item.name}">
             <div>
               <p class="font-medium text-gray-800">${item.name}</p>
               <p class="text-sm text-gray-500">x${item.qty}</p>
             </div>
           </div>
-          <p class="font-semibold text-gray-700">$${(item.price * item.qty).toFixed(2)}</p>
+          <p class="font-semibold text-gray-700">${symbol}${itemTotalDisplay.toFixed(2)}</p>
         `;
         orderContainer.appendChild(div);
       });
-      orderTotal.textContent = '$' + total.toFixed(2);
-      return total;
+
+      // Calculate final breakdown values in USD (always calculated in base USD)
+      const shippingUSD = SHIPPING_FEE;
+      const taxUSD = subtotalUSD * TAX_RATE; 
+      const totalUSD = subtotalUSD + shippingUSD + taxUSD;
+      const totalGHS = totalUSD * EXCHANGE_RATE_GHS_PER_USD;
+      
+      return { totalUSD, totalGHS, subtotalUSD, totalItems }; 
     }
 
-    const totalAmount = renderOrder();
+    // Call renderOrder with USD initially
+    let totals = renderOrder('USD');
 
-    // PayPal Integration
-    paypal.Buttons({
-      style: { layout: 'horizontal', color: 'gold', shape: 'rect', label: 'paypal' },
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{
-            amount: { value: totalAmount.toFixed(2) },
-            description: "Cocoa Potash Order"
-          }]
-        });
-      },
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          alert('Payment successful! Thank you, ' + details.payer.name.given_name);
-          localStorage.removeItem('cart');
-          window.location.href = 'thank-you.html';
-        });
-      },
-      onError: function(err) {
-        console.error(err);
-        alert('There was an error processing your payment.');
+    // -------- Paystack integration --------
+    const PAYSTACK_PUBLIC_KEY = "pk_test_7aeaa0cf1a7cf6df8092bc6439e484861b73fb21"; // your public key
+    const paymentHeader = document.getElementById('payment-method-header');
+    const gatewayInstructions = document.getElementById('gateway-instructions');
+    
+    function uniqueReference() {
+      return "cp_" + Math.random().toString(36).slice(2) + Date.now();
+    }
+
+    function openPaystackCheckout() {
+      const email = (emailInput.value || "").trim();
+      const firstName = (firstNameInput.value || "").trim();
+      const lastName = (lastNameInput.value || "").trim();
+      const phone = (phoneInput.value || "").trim();
+      const address = (addressInput.value || "").trim();
+      
+      if (!email || !firstName || !lastName || !phone || !address) {
+          alert("Please fill in all required contact and address fields to proceed.");
+          return;
       }
-    }).render('#paypal-button-container');
+      
+      const reference = uniqueReference();
+      const amountPesewas = Math.round(totals.totalGHS * 100); 
+      
+      if (!amountPesewas || amountPesewas <= 0) {
+        alert("Your cart is empty.");
+        return;
+      }
 
-    // Manual payment form (placeholder)
-    document.getElementById('manual-payment-form').addEventListener('submit', e => {
-      e.preventDefault();
-      alert('Manual payment (card / mobile money / bank transfer) submitted!');
-      localStorage.removeItem('cart');
-      window.location.href = 'thank-you.html';
+      const handler = PaystackPop.setup({
+        key: PAYSTACK_PUBLIC_KEY,
+        email: email,
+        amount: amountPesewas,
+        currency: "GHS",
+        ref: reference,
+        channels: ['card', 'mobile_money'],
+        metadata: { 
+            cart_items: cart, 
+            totalUSD: totals.totalUSD, 
+            totalGHS: totals.totalGHS,
+            custom_fields: [
+                {
+                    display_name: "Customer Name",
+                    variable_name: "customer_name",
+                    value: `${firstName} ${lastName}`
+                },
+                {
+                    display_name: "Phone Number",
+                    variable_name: "phone_number",
+                    value: phone
+                },
+                {
+                    display_name: "Shipping Address",
+                    variable_name: "shipping_address",
+                    value: address
+                }
+            ]
+        },
+
+        callback: function (response) {
+          // IMPORTANT: This verification must be done server-side in production.
+          fetch(`http://localhost:3000/api/paystack/verify?reference=${encodeURIComponent(response.reference)}`)
+            .then(r => r.json())
+            .then(v => {
+              if (v.status === "success") {
+                alert("Payment verified successfully!");
+                localStorage.removeItem('cart');
+                window.location.href = 'thank-you.html?ref=' + encodeURIComponent(response.reference);
+              } else {
+                alert("Payment verification failed. Please contact support.\nRef: " + response.reference);
+              }
+            })
+            .catch(() => alert("Network error verifying payment"));
+        },
+        onClose: function () {
+          console.log("Paystack modal closed");
+        }
+      });
+      handler.openIframe();
+    }
+
+    function handleProceedToPayment() {
+        const firstName = (firstNameInput.value || "").trim();
+        const lastName = (lastNameInput.value || "").trim();
+        const email = (emailInput.value || "").trim();
+        const phone = (phoneInput.value || "").trim();
+        const address = (addressInput.value || "").trim();
+        
+        // --- Validation Check ---
+        if (!firstName) {
+            alert("Please enter your first name.");
+            firstNameInput.focus();
+            return;
+        }
+        if (!lastName) {
+            alert("Please enter your last name.");
+            lastNameInput.focus();
+            return;
+        }
+        if (!email) {
+            alert("Please enter your email address to proceed.");
+            emailInput.focus();
+            return;
+        }
+        if (!phone) {
+            alert("Please enter your phone number for delivery.");
+            phoneInput.focus();
+            return;
+        }
+        if (!address) {
+            alert("Please enter your shipping address.");
+            addressInput.focus();
+            return;
+        }
+        // --- End Validation Check ---
+        
+        if (userLocation === 'ghana') {
+            // 1. Ensure UI is rendered in GHS (calls renderOrder('GHS') internally)
+            renderPaymentOptions(); 
+            // 2. Open the Paystack modal
+            openPaystackCheckout();
+        } else if (userLocation === 'international') {
+            // 1. Ensure UI is rendered in USD (calls renderOrder('USD') internally)
+            renderPaymentOptions(); 
+            // 2. Handle international payment (placeholder)
+            alert(`Initiating International Payment of $${totals.totalUSD.toFixed(2)} to ${email}. \nName: ${firstName} ${lastName}\nShipping to: ${address}. \nPhone: ${phone}.`);
+        }
+    }
+    
+    // Attach listener to the new button
+    proceedBtn.addEventListener('click', handleProceedToPayment);
+
+    // New function to show the page content
+    function showContent() {
+        document.body.classList.remove('content-hidden');
+    }
+
+    // -------- Location-based UI Rendering Logic --------
+    function renderPaymentOptions() {
+      // Show content after a location has been selected
+      showContent();
+      
+      const currency = userLocation === 'ghana' ? 'GHS' : 'USD';
+      // Hide the "Coming Soon" overlay if a location is selected (and not 'international')
+      if (userLocation === 'international') {
+          comingSoonOverlay.classList.remove('hidden');
+      } else {
+          comingSoonOverlay.classList.add('hidden');
+      }
+
+      // Re-calculate and re-render the order items in the correct currency
+      totals = renderOrder(currency); 
+      const symbol = currency === 'GHS' ? 'GHS ' : '$';
+      const rate = currency === 'GHS' ? EXCHANGE_RATE_GHS_PER_USD : 1;
+
+      gatewayInstructions.innerHTML = '';
+      paymentHeader.classList.remove('hidden');
+      const allLogos = document.querySelectorAll('#logos-container img');
+
+      if (userLocation === 'ghana') {
+        proceedBtn.textContent = `Pay Now`;
+        proceedBtn.classList.remove('hidden');
+
+        // Calculate GHS values for the breakdown
+        const subtotalGHS = totals.subtotalUSD * rate;
+        const shippingGHS = SHIPPING_FEE * rate;
+        const taxGHS = totals.subtotalUSD * TAX_RATE * rate;
+
+        // Update ALL breakdown fields to GHS
+        orderTotal.textContent = symbol + totals.totalGHS.toFixed(2);
+        
+        itemsLabelEl.textContent = `Items (${totals.totalItems})`;
+        subtotalPriceEl.textContent = symbol + subtotalGHS.toFixed(2);
+        shippingFeeEl.textContent = symbol + shippingGHS.toFixed(2);
+        taxFeeEl.textContent = symbol + taxGHS.toFixed(2);
+
+        // Set logo visibility (Grayscale international, show local)
+        allLogos.forEach(img => {
+            if (img.alt.includes('PayPal') || img.alt.includes('Visa') || img.alt.includes('MasterCard')) {
+                img.style.filter = 'grayscale(100%)';
+            } else {
+                img.style.filter = 'grayscale(0%)';
+            }
+        });
+        
+      } else if (userLocation === 'international') {
+        paymentHeader.textContent = "Payment Method: Debit/Credit Card & PayPal (USD)";
+        // Hide actual payment button for 'Coming Soon' state
+        proceedBtn.classList.add('hidden'); 
+        gatewayInstructions.innerHTML = ``; // Clear gateway instructions
+
+        // Update ALL breakdown fields to USD
+        orderTotal.textContent = symbol + totals.totalUSD.toFixed(2);
+
+        itemsLabelEl.textContent = `Items (${totals.totalItems})`;
+        subtotalPriceEl.textContent = symbol + totals.subtotalUSD.toFixed(2);
+        shippingFeeEl.textContent = symbol + SHIPPING_FEE.toFixed(2);
+        taxFeeEl.textContent = symbol + (totals.subtotalUSD * TAX_RATE).toFixed(2); 
+        
+        // Set logo visibility (Grayscale local, show international)
+        allLogos.forEach(img => {
+            if (img.alt.includes('MTN MoMo') || img.alt.includes('AirtelTigo')) {
+                img.style.filter = 'grayscale(100%)';
+            } else {
+                img.style.filter = 'grayscale(0%)';
+            }
+        });
+        
+      }
+    }
+    
+    // Initialize: Always attach listeners and show modal first.
+    function initializePaymentPage() {
+        userLocation = sessionStorage.getItem(SESSION_KEY); 
+        modal.classList.remove('hidden'); 
+        
+        document.querySelectorAll('.country-select-btn').forEach(button => {
+            button.removeEventListener('click', handleModalSelection); 
+            button.addEventListener('click', handleModalSelection);
+        });
+
+        if (userLocation) {
+             renderPaymentOptions();
+        }
+    }
+
+    // Handler function for modal buttons
+    function handleModalSelection() {
+        userLocation = this.dataset.location;
+        sessionStorage.setItem(SESSION_KEY, userLocation);
+        modal.classList.add('hidden'); // Close modal
+        renderPaymentOptions(); // Render the page with new options and show content
+    }
+
+
+    // Allow user to change location: now just explicitly shows the modal again
+    document.getElementById('change-location-btn').addEventListener('click', () => {
+        document.body.classList.add('content-hidden'); 
+        modal.classList.remove('hidden');
+        // Ensure "Coming Soon" overlay is hidden when re-opening modal
+        comingSoonOverlay.classList.add('hidden'); 
     });
+
+    // Start the process: Ensures the modal is the very first interaction
+    initializePaymentPage();
+    
   </script>
 </body>
 </html>
