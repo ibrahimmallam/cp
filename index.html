@@ -72,10 +72,12 @@
     }
     .carousel-container::before {
       left: 0;
+      /* Adjusted to white background from original */
       background: linear-gradient(to right, #f3f4f6, transparent);
     }
     .carousel-container::after {
       right: 0;
+       /* Adjusted to white background from original */
       background: linear-gradient(to left, #f3f4f6, transparent);
     }
 
@@ -88,10 +90,98 @@
       margin-left: -50vw;
       margin-right: -50vw;
     }
+
+    /* Skincare Grid Animation CSS */
+    .skincare-grid-item {
+        overflow: hidden;
+        position: relative; /* Essential for absolute positioning of dots and buttons */
+    }
+    .skincare-image-track {
+        display: flex;
+        /* Width holds all images (e.g., 200% for 2 images, 300% for 3 images) */
+        height: 100%;
+        transition: transform 0.5s ease;
+    }
+    .skincare-image-track > img {
+        height: 100%;
+        object-fit: cover;
+    }
+    /* New Button Visibility CSS (Button appears on hover) */
+    .swipe-button {
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    .skincare-grid-item:hover .swipe-button {
+        opacity: 1;
+    }
+
+    /* --- NEW DOT STYLES (Requested Change) --- */
+    .image-dots {
+        position: absolute;
+        bottom: 10px;
+        left: 10px;
+        display: flex;
+        gap: 5px;
+        z-index: 10;
+    }
+    .image-dot {
+        width: 8px;
+        height: 8px;
+        background-color: #000;
+        border-radius: 50%;
+        opacity: 0.5;
+        transition: opacity 0.3s;
+    }
+    .image-dot.active {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+    /* --- END NEW DOT STYLES --- */
+
+
+    /* --- NEW IMPACT SECTION STYLES --- */
+    .impact-split-section {
+        background-color: #f8f8f8; /* Light grey background for the whole section */
+    }
+
+    .impact-stat-card {
+        background-color: #ffffff; /* White card background */
+        border: 1px solid #e0e0e0; /* Light grey border */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); /* Soft shadow */
+        transition: transform 0.4s ease-out, box-shadow 0.4s ease-out, background-color 0.3s;
+        will-change: transform;
+    }
+
+    .impact-stat-card:hover {
+        transform: translateY(-8px) rotate(1deg); /* Slight lift and rotation */
+        box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15); /* More pronounced shadow */
+        background-color: #f0f0f0; /* Slightly darker on hover */
+    }
+
+    .impact-number {
+        color: #333333; /* Dark grey for numbers */
+        transition: color 0.4s ease-out;
+    }
+
+    .impact-stat-card:hover .impact-number {
+        color: #000000; /* Black on hover */
+    }
+
+    .impact-label {
+        color: #666666; /* Medium grey for labels */
+    }
+
+    /* For the image side of the split section */
+    .impact-image-side {
+      background-image: url('https://images.unsplash.com/photo-1616790956976-b60b6b8b0b0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80'); /* Replace with a suitable image */
+      background-size: cover;
+      background-position: center;
+      min-height: 400px; /* Ensure image is visible on smaller screens */
+    }
+    /* --- END NEW IMPACT SECTION STYLES --- */
   </style>
 </head>
 <body class="bg-white">
-  <!-- Header -->
   <header class="bg-white shadow-md sticky top-0 z-50">
     <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between items-center py-4">
@@ -106,6 +196,7 @@
           <a href="index.html" class="text-gray-600 hover:text-growth-green font-medium">Home</a>
           <a href="#products" class="text-gray-600 hover:text-growth-green font-medium">Our Products</a>
           <a href="news.html" class="text-gray-600 hover:text-growth-green font-medium">News</a>
+          <a href="blog.html" class="text-gray-600 hover:text-growth-green font-medium">Blog</a>
           <a href="about.html" class="text-gray-600 hover:text-growth-green font-medium">About Us</a>
         </div>
         <div class="hidden md:block">
@@ -129,6 +220,7 @@
         <a href="index.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Home</a>
         <a href="#products" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Our Products</a>
         <a href="news.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">News</a>
+        <a href="blog.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">Blog</a>
         <a href="about.html" class="block py-2 px-4 text-sm text-gray-700 hover:bg-gray-100">About Us</a>
         <a href="#contact" class="block mt-2 text-center bg-brand-dark text-white font-bold py-2 px-5 rounded-lg">Contact Us</a>
       </div>
@@ -136,7 +228,6 @@
   </header>
 
   <main>
-    <!-- Hero -->
     <section class="bg-black text-white relative">
       <div class="absolute inset-0">
         <img src="images/CocoaPodHeroImage.jpeg" class="w-full h-full object-cover opacity-20" alt="A pile of cocoa pod husks" />
@@ -156,7 +247,6 @@
       </div>
     </section>
 
-    <!-- Intro -->
     <section class="py-16 md:py-24 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
@@ -168,7 +258,7 @@
               Rooted in Ghana’s farming communities, Cocoa Potash tackles one of agriculture’s biggest challenges, reducing waste and regenerating the land,while delivering affordable organic fertilizer for farmers and high-purity, ESG-compliant organic potash for industry. We strengthen agricultural and industrial supply chains to drive Africa’s circular economy forward.
             </p>
             <p class="text-lg text-gray-700">
-              We Partner directly with farmers to convert millions of kilograms of agricultural waste into sustainable, high-value products that cuts emissions, and supply industries with responsible inputs for farming, manufacturing, and technology.
+              We partner directly with farmers to convert millions of kilograms of agricultural waste into sustainable, high-value products that cuts emissions, and supply industries with responsible inputs for farming, manufacturing, and technology.
             </p>
             <a href="#impact" class="inline-block text-growth-green font-semibold text-lg hover:underline">See Our Impact in Action &rarr;</a>
           </div>
@@ -183,68 +273,219 @@
       </div>
     </section>
 
-    <!-- Products -->
     <section id="products" class="py-16 md:py-24 bg-gray-50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-14">
-          <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark tracking-tight">
-            Products that Turn Waste into Value
-          </h2>
-          <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
-            Premium quality, traceable origins, and measurable impact designed for industry, agriculture, and personal care.
-          </p>
-        </div>
-
-        <!-- Cards -->
-        <div class="flex flex-col lg:flex-row gap-8 pb-6 snap-x snap-mandatory">
-          <article class="min-w-[350px] lg:min-w-[400px] bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm hover:shadow-lg transition p-6 md:p-8 flex flex-col snap-start">
-            <img src="images/mockup_almost-removebg-preview.png" alt="Organic Potash" class="h-64 w-auto mx-auto object-contain drop-shadow mb-6" />
-            <div class="flex items-center gap-3 mb-4">
-              <span class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-growth-green px-3 py-1 rounded-full">
-                <span class="h-2 w-2 rounded-full bg-white/80"></span> For Industry
-              </span>
-              <span class="text-xs text-gray-500">Food • Pharma • Biotech</span>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-14">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark tracking-tight">
+                    The Next Generation of Sustainable Products
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+                    Each of our sustainable product delivers premium quality, traceable origins, and maximum benefit for industry, agriculture, and personal care, to drive a greener future.
+                </p>
             </div>
-            <h3 class="font-bold text-xl text-brand-dark">Organic Potash</h3>
-            <p class="mt-3 text-gray-700">
-              Contaminant-free, <strong>96% purity</strong> K₂CO₃ produced from agricultural by-products with full traceability.
-            </p>
-          </article>
 
-          <article class="min-w-[350px] lg:min-w-[400px] bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm hover:shadow-lg transition p-6 md:p-8 flex flex-col snap-start">
-            <img src="images/cocoboost_mockup_dud.png" alt="CocoBoost" class="h-64 w-auto mx-auto object-contain drop-shadow mb-6" />
-            <div class="flex items-center gap-3 mb-4">
-              <span class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-growth-green px-3 py-1 rounded-full">
-                <span class="h-2 w-2 rounded-full bg-white/80"></span> For Agriculture
-              </span>
-              <span class="text-xs text-gray-500">Cocoa • Maize • Vegetables</span>
+            <div class="mt-20">
+                <h2 class="text-center text-3xl md:text-4xl font-bold text-brand-dark mb-8">
+                    Shop From Our Premium Skincare Products
+                </h2>
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    
+                    <div class="rounded-xl shadow-lg hover:shadow-2xl transition duration-500">
+                        <a href="shop_now.html" class="block">
+                            <div class="skincare-grid-item cursor-pointer h-72 rounded-t-xl" id="skincare-1" data-current-slide="0">
+                                <div class="skincare-image-track" style="width: 200%;">
+                                    <img src="images/paste_1.png" alt="Africa Black Paste Soap - Initial View" class="w-1/2 h-full object-cover" />
+                                    <img src="images/soap_model.png" alt="Africa Black Paste Soap - Hover View 1" class="w-1/2 h-full object-cover" />
+                                </div>
+                                <button onclick="nextSlide('skincare-1', 2, event)" class="swipe-button absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/50 hover:bg-white/80 p-2 rounded-full text-brand-dark z-10 focus:outline-none">
+                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                                </button>
+                                <div class="image-dots">
+                                    <span class="image-dot active"></span>
+                                    <span class="image-dot"></span>
+                                </div>
+                            </div>
+                            <div class="text-center py-3 bg-white rounded-b-xl">
+                                <span class="text-brand-dark font-extrabold text-lg tracking-wider">Paste Soap</span>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="rounded-xl shadow-lg hover:shadow-2xl transition duration-500">
+                        <a href="shop_now.html" class="block">
+                            <div class="skincare-grid-item cursor-pointer h-72 rounded-t-xl" id="skincare-2" data-current-slide="0">
+                                <div class="skincare-image-track" style="width: 200%;">
+                                    <img src="images/showergel1.jpg" alt="Africa Black Shower Gel - Initial View" class="w-1/2 h-full object-cover" />
+                                    <img src="images/showergel_main.png" alt="Africa Black Shower Gel - Hover View 1" class="w-1/2 h-full object-cover" />
+                                </div>
+                                <button onclick="nextSlide('skincare-2', 2, event)" class="swipe-button absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/50 hover:bg-white/80 p-2 rounded-full text-brand-dark z-10 focus:outline-none">
+                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                                </button>
+                                <div class="image-dots">
+                                    <span class="image-dot active"></span>
+                                    <span class="image-dot"></span>
+                                </div>
+                            </div>
+                            <div class="text-center py-3 bg-white rounded-b-xl">
+                                <span class="text-brand-dark font-extrabold text-lg tracking-wider">Shower Gel</span>
+                            </div>
+                        </a>
+                    </div>
+                    
+                    <div class="rounded-xl shadow-lg hover:shadow-2xl transition duration-500">
+                        <a href="shop_now.html" class="block">
+                            <div class="skincare-grid-item cursor-pointer h-72 rounded-t-xl" id="skincare-3" data-current-slide="0">
+                                <div class="skincare-image-track h-full" style="width: 200%;">
+                                    <img src="images/barsoap.jpg" alt="Africa Black Paste Soap" class="w-1/2 h-full object-cover" />
+                                    <img src="images/barsoap_mm.png" alt="Premium Africa Black Bar Soap - Hover View 1" class="w-1/2 h-full object-cover" />
+                                </div>
+                                <button onclick="nextSlide('skincare-3', 2, event)" class="swipe-button absolute right-2 top-1/2 transform -translate-y-1/2 bg-white/50 hover:bg-white/80 p-2 rounded-full text-brand-dark z-10 focus:outline-none">
+                                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                                </button>
+                                <div class="image-dots">
+                                    <span class="image-dot active"></span>
+                                    <span class="image-dot"></span>
+                                </div>
+                            </div>
+                            <div class="text-center py-3 bg-white rounded-b-xl">
+                                <span class="text-brand-dark font-extrabold text-lg tracking-wider">Bar Soap </span>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
             </div>
-            <h3 class="font-bold text-xl text-brand-dark">CocoBoost Organic Fertilizer</h3>
-            <p class="mt-3 text-gray-700">Locally made to restore soils and raise yields while staying <strong>affordable for farmers</strong>.</p>
-          </article>
-
-          <article class="min-w-[350px] lg:min-w-[400px] bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm hover:shadow-lg transition p-6 md:p-8 flex flex-col snap-start">
-            <img src="images/black soap.png" alt="African Black Soap" class="h-64 w-auto mx-auto object-contain drop-shadow mb-6" />
-            <div class="flex items-center gap-3 mb-4">
-              <span class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-growth-green px-3 py-1 rounded-full">
-                <span class="h-2 w-2 rounded-full bg-white/80"></span> Personal Care
-              </span>
-              <span class="text-xs text-gray-500">Wholesale • Retail</span>
+            <div class="text-center mb-14 mt-20">
+                <h2 class="text-3xl md:text-4xl font-extrabold text-brand-dark tracking-tight">
+                    For Bulk Purchase
+                </h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">
+                  Ideal for industrial buyers and large-scale agricultural operations.
+                </p>
             </div>
-            <h3 class="font-bold text-xl text-brand-dark">African Black Soap</h3>
-            <p class="mt-3 text-gray-700">Crafted with sustainably sourced organic potash and natural oils — gentle, moisturizing, and 100% natural.</p>
-          </article>
-        </div>
 
-        <div class="mt-16 mb-16 text-center">
-          <a href="shop_now.html" class="inline-block bg-growth-green text-white font-bold py-4 px-10 rounded-lg shadow-lg hover:bg-growth-green-dark transition-colors duration-300 text-lg">
-            SHOP NOW
-          </a>
+            <div class="flex flex-col lg:flex-row gap-8 pb-6 snap-x snap-mandatory">
+                
+                <article class="min-w-[350px] lg:min-w-[400px] bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm hover:shadow-lg transition p-6 md:p-8 flex flex-col snap-start">
+                    <img src="images/mockup_almost-removebg-preview.png" alt="Organic Potash" class="h-64 w-auto mx-auto object-contain drop-shadow mb-6" />
+                    
+                    <div class="flex-grow"> 
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-growth-green px-3 py-1 rounded-full">
+                                <span class="h-2 w-2 rounded-full bg-white/80"></span> For Industry
+                            </span>
+                            <span class="text-xs text-gray-500">Food • Pharma • Biotech</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-brand-dark">Organic Potash</h3>
+                        <p class="mt-3 text-gray-700">
+                            Contaminant-free, <strong>96% purity</strong> K₂CO₃ produced from agricultural by-products with full traceability. A high-performance, ESG-forward input with full traceability from farm to factory.
+                        </p>
+                        <div class="mt-6 grid grid-cols-2 gap-y-3 text-sm text-gray-700">
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-growth-green mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                High purity & consistent specs
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-growth-green mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Ethical, traceable sourcing
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-growth-green mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Low-carbon process
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-growth-green mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Supply assurance at scale
+                            </div>
+                        </div>
+                    </div>
+                    <a href="request-sample.html" class="mt-8 bg-brand-dark text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-brand-dark-light transition-colors duration-300 text-center">
+                        Request a Sample
+                    </a>
+                </article>
+
+                <article class="min-w-[350px] lg:min-w-[400px] bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm hover:shadow-lg transition p-6 md:p-8 flex flex-col snap-start">
+                    <img src="images/cocoboost_mockup_dud.png" alt="CocoBoost" class="h-64 w-auto mx-auto object-contain drop-shadow mb-6" />
+                    
+                    <div class="flex-grow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-growth-green px-3 py-1 rounded-full">
+                                <span class="h-2 w-2 rounded-full bg-white/80"></span> For Agriculture
+                            </span>
+                            <span class="text-xs text-gray-500">Cocoa • Maize • Vegetables</span>
+                        </div>
+                        <h3 class="font-bold text-xl text-brand-dark">CocoBoost Organic Fertilizer</h3>
+                        <p class="mt-3 text-gray-700">Locally made to rejuvenate soils and improve crop yields, this product empowers farmers with an affordable, sustainable solution that nurtures both the land and their livelihoods</strong>.</p>
+                        <div class="mt-6 grid grid-cols-2 gap-y-3 text-sm text-gray-700">
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-growth-green mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Up to 40-50% yield increase
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-growth-green mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Soil health & water retention
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-growth-green mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                29% cost savings vs. imported chemicals
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-growth-green mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Farmer training & support
+                            </div>
+                        </div>
+                    </div>
+                    <a href="shop_now.html" class="mt-8 bg-brand-dark text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-brand-dark-light transition-colors duration-300 text-center">
+                        Purchase for Your Farm
+                    </a>
+                </article>
+
+                <article class="min-w-[350px] lg:min-w-[400px] bg-white rounded-2xl ring-1 ring-gray-200 shadow-sm hover:shadow-lg transition p-6 md:p-8 flex flex-col snap-start">
+                    <img src="images/all_mock_off.png" alt="African Black Soap" class="h-64 w-auto mx-auto object-contain drop-shadow mb-6" />
+                    
+                    <div class="flex-grow">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="inline-flex items-center gap-2 text-xs font-semibold text-white bg-growth-green px-3 py-1 rounded-full">
+                                <span class="h-2 w-2 rounded-full bg-white/80"></span> Personal Care
+                            </span>
+                            <span class="text-xs text-gray-500">•Wholesale </span>
+                        </div>
+                        <h3 class="font-bold text-xl text-brand-dark">Skincare Products </h3>
+                        <p class="mt-3 text-gray-700">Crafted with sustainably sourced organic potash and natural oils. Our shower gel, paste soap, and bar soap provide 24-hour hydration and 100% natural care.</p>
+                        <div class="mt-6 grid grid-cols-2 gap-y-3 text-sm text-gray-700">
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-growth-green mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                100% natural ingredients
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-growth-green mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Gentle, pH-balanced cleanse
+                            </div>
+                            <div
+                                class="flex items-start">
+                                <svg class="h-5 w-5 text-growth-green mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                24-hour lasting hydration
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="h-5 w-5 text-growth-green mr-2 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                                Sustainably sourced and eco-friendly
+                            </div>    
+                        </div>
+                    </div>
+                    <a href="shop_now.html" class="mt-8 bg-brand-dark text-white font-bold py-3 px-8 rounded-lg shadow-lg hover:bg-brand-dark-light transition-colors duration-300 text-center">
+                        Wholesale
+                    </a>
+                </article>
+            </div>
+
+            <div class="mt-16 mb-16 text-center">
+                <a href="shop_now.html" class="inline-block bg-growth-green text-white font-bold py-4 px-10 rounded-lg shadow-lg hover:bg-growth-green-dark transition-colors duration-300 text-lg">
+                    SHOP NOW
+                </a>
+            </div>
         </div>
-      </div>
     </section>
 
-          <!-- Impact Section  -->
         <section id="impact" class="py-16 md:py-24 bg-brand-secondary-dark text-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center">
@@ -252,150 +493,185 @@
                     <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-300">We measure our success by the positive change we create for communities and the planet.</p>
                 </div>
                 <div class="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 text-center">
-                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-green">1,000+</p><p class="mt-1 text-gray-400 font-medium">Farmers Empowered</p></div>
-                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-green">39+</p><p class="mt-1 text-gray-400 font-medium">Communities Impacted</p></div>
-                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-green">78,000+</p><p class="mt-1 text-gray-400 font-medium">Kg Waste Recycled</p></div>
-                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-green">40%+</p><p class="mt-1 text-gray-400 font-medium">Crop Yield Increase</p></div>
-                    <div class="p-4 col-span-2 md:col-span-1"><p class="text-4xl font-extrabold text-growth-green">1,300+</p><p class="mt-1 text-gray-400 font-medium">Women Impacted</p></div>
+                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-white">1,000+</p><p class="mt-1 text-gray-400 font-medium">Farmers Empowered</p></div>
+                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-white">39+</p><p class="mt-1 text-gray-400 font-medium">Communities Impacted</p></div>
+                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-white">78,000+</p><p class="mt-1 text-gray-400 font-medium">Kg Waste Recycled</p></div>
+                    <div class="p-4"><p class="text-4xl font-extrabold text-growth-white">40%+</p><p class="mt-1 text-gray-400 font-medium">Crop Yield Increase</p></div>
+                    <div class="p-4 col-span-2 md:col-span-1"><p class="text-4xl font-extrabold text-growth-white">1,300+</p><p class="mt-1 text-gray-400 font-medium">Women Impacted</p></div>
                 </div>
             </div>
         </section>
 
-        <!-- News Section Preview  -->
-        <section id="news" class="py-16 md:py-24 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl md:text-4xl font-bold text-brand-dark">In the News</h2>
-                    <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">See how our mission is making headlines and gaining recognition.</p>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden flex flex-col">
-                        <img src="images/MITWFATEAMPIC.jpg" class="w-full h-48 object-cover" alt="MIT Prize">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="font-bold text-xl text-brand-dark">Cocoa Potash Wins $20,000 at MIT Innovation Prize</h3>
-                            <p class="mt-2 text-gray-600 flex-grow">This recognition for our eco-friendly process fuels our mission to drive sustainable farming worldwide.</p>
-                            <a href="news.html" class="mt-4 inline-block text-growth-green font-semibold hover:underline">Read More &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden flex flex-col">
-                        <img src="images/hult-prize-hero.jpeg" class="w-full h-48 object-cover" alt="Hult Prize">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="font-bold text-xl text-brand-dark">Reflecting on Our Hult Prize Journey</h3>
-                            <p class="mt-2 text-gray-600 flex-grow">Our time at the Hult Prize Global Incubator sharpened our mission to tackle agricultural waste and empower communities.</p>
-                            <a href="news.html" class="mt-4 inline-block text-growth-green font-semibold hover:underline">Read More &rarr;</a>
-                        </div>
-                    </div>
-                    <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden flex flex-col">
-                        <img src="images/Greentownlabs.jpeg" class="w-full h-48 object-cover" alt="Greentown Labs">
-                        <div class="p-6 flex flex-col flex-grow">
-                            <h3 class="font-bold text-xl text-brand-dark">Cocoa Potash Visits Greentown Labs</h3>
-                            <p class="mt-2 text-gray-600 flex-grow">We connected with North America's largest climatetech incubator to explore innovations and scale our solutions.</p>
-                            <a href="news.html" class="mt-4 inline-block text-growth-green font-semibold hover:underline">Read More &rarr;</a>
-                        </div>
+    <section id="news" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-dark">In the News</h2>
+                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">See how our mission is making headlines and gaining recognition.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden flex flex-col">
+                    <img src="images/MITWFATEAMPIC.jpg" class="w-full h-48 object-cover" alt="MIT Prize">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-bold text-xl text-brand-dark">Cocoa Potash Wins $20,000 at MIT Innovation Prize</h3>
+                        <p class="mt-2 text-gray-600 flex-grow">This recognition for our eco-friendly process fuels our mission to drive sustainable farming worldwide.</p>
+                        <a href="news.html" class="mt-4 inline-block text-growth-green font-semibold hover:underline">Read More &rarr;</a>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- Partners & Supporters Section  -->
-        <section class="py-16 bg-gray-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-center text-3xl font-bold text-brand-dark">Our Partners & Supporters</h2>
-                <div class="carousel-container mt-10">
-                    <div class="carousel-track">
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Case+Western+Reserve+University+Veale+Institute+logo-1364346897.png" alt="Case Western Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Hult-Prize-logo-1-1598300507.png" alt="Hult Prize Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/CCHUB-logo-825881762.png" alt="CCHUB Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Ghana-Climate-Innovation-Centre-GCIC-3463433498.png" alt="GCIC Logo" class="h-12 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/KNUST-Logo-Vector.svg--467444582.png" alt="KNUST Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/cargill-logo-vector.svg" alt="Cargill Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Venture-Devils-Logo.png" alt="Venture Devils Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/United-Way-Logo.png" alt="United Way Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/MastercardFdn_Colour-POS-2044527937.png" alt="Mastercard Foundation Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-
-                        <!-- Duplicate for seamless loop -->
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Case+Western+Reserve+University+Veale+Institute+logo-1364346897.png" alt="Case Western Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Hult-Prize-logo-1-1598300507.png" alt="Hult Prize Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/CCHUB-logo-825881762.png" alt="CCHUB Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Ghana-Climate-Innovation-Centre-GCIC-3463433498.png" alt="GCIC Logo" class="h-12 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/KNUST-Logo-Vector.svg--467444582.png" alt="KNUST Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/cargill-logo-vector.svg" alt="Cargill Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Venture-Devils-Logo.png" alt="Venture Devils Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/United-Way-Logo.png" alt="United Way Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
-                        <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/MastercardFdn_Colour-POS-2044527937.png" alt="Mastercard Foundation Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden flex flex-col">
+                    <img src="images/hult-prize-hero.jpeg" class="w-full h-48 object-cover" alt="Hult Prize">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-bold text-xl text-brand-dark">Reflecting on Our Hult Prize Journey</h3>
+                        <p class="mt-2 text-gray-600 flex-grow">Our time at the Hult Prize Global Incubator sharpened our mission to tackle agricultural waste and empower communities.</p>
+                        <a href="news.html" class="mt-4 inline-block text-growth-green font-semibold hover:underline">Read More &rarr;</a>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <!-- About Us Section Preview  -->
-        <section id="about" class="py-16 md:py-24 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-3xl md:text-4xl font-bold text-brand-dark">Our Team</h2>
-                <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Meet the passionate leaders driving our mission forward.</p>
-                <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-                    <div><img src="images/IbrahimQuagraine.png" class="rounded-full mx-auto w-32 h-32 shadow-lg object-cover" alt="Ibrahim Quagraine"><h3 class="mt-4 font-bold text-lg text-brand-dark">Ibrahim Quagraine</h3><p class="text-growth-green">Chief Executive Officer</p></div>
-                    <div><img src="images/PrinceHeadShot.png" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Prince Agyei Baffour"><h3 class="mt-4 font-bold text-lg text-brand-dark">Prince Agyei Baffour</h3><p class="text-growth-green">Chief Operations Officer</p></div>
-                    <div><img src="images/itha_pro.png" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Ithabeleng Makhetha"><h3 class="mt-4 font-bold text-lg text-brand-dark">Ithabeleng Makhetha</h3><p class="text-growth-green">Chief Finance Officer</p></div>
-                    <div><img src="images/thomas_new_pro.png" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Thomas Tawiah-Baah"><h3 class="mt-4 font-bold text-lg text-brand-dark">Thomas Tawiah-Baah</h3><p class="text-growth-green">Chief Technology Officer</p></div>
-                </div>
-                <div class="mt-12">
-                    <a href="about.html" class="inline-block bg-white text-growth-green font-semibold py-3 px-8 rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors">Meet Our Full Team & Advisors</a>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer id="contact" class="bg-brand-dark text-white">
-        <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-                <div class="md:col-span-2">
-                    <a href="index.html" class="flex items-center space-x-2">
-                        <img src="images/logo_white_large.png" alt="Cocoa Potash Logo" class="h-10 w-auto">
-                    </a>
-                    <p class="mt-4 text-gray-400 max-w-xs">Pioneering Africa's potash economy by transforming agricultural waste into sustainable wealth for farms and industries.</p>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold tracking-wider uppercase">Links</h3>
-                    <ul class="mt-4 space-y-2">
-                        <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
-                        <li><a href="#products" class="text-gray-400 hover:text-white">Products</a></li>
-                        <li><a href="news.html" class="text-gray-400 hover:text-white">News</a></li>
-                        <li><a href="request-sample.html" class="text-gray-400 hover:text-white">Order Here</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold tracking-wider uppercase">Get in Touch</h3>
-                    <p class="mt-4 text-gray-400">Have a question or want to partner with us? We’d love to hear from you.</p>
-                    <ul class="mt-4 space-y-2 text-gray-400">
-                        <li>Cocoa Potash Limited</li>
-                        <li>P. O. Box 23, Bekwai Ashanti Region</li>
-                        <li class="hover:text-white"><a href="mailto:info@cocoapotash.com">Email: info@cocoapotash.com</a></li>
-                        <li class="hover:text-white"><a href="tel:+23355704707">+233557848787</a> / <a href="tel:+233505554040">+233505554040</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="mt-12 border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-between items-center">
-                <p class="text-gray-500">&copy; 2025 Cocoa Potash Limited. All Rights Reserved.</p>
-                <div class="flex space-x-6 mt-4 sm:mt-0">
-                    
-                     <a href="https://www.linkedin.com/company/81955507" target="_blank" class="text-gray-400 hover:text-white">
-                       <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.1c.5-.95 1.75-2.2 3.6-2.2 3.85 0 4.6 2.5 4.6 5.8V24h-4v-8.6c0-2.05-.05-4.7-2.85-4.7-2.85 0-3.3 2.25-3.3 4.55V24h-4V8z" /></svg>
-                     </a>
-
+                <div class="bg-gray-50 rounded-lg shadow-lg overflow-hidden flex flex-col">
+                    <img src="images/Greentownlabs.jpeg" class="w-full h-48 object-cover" alt="Greentown Labs">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="font-bold text-xl text-brand-dark">Cocoa Potash Visits Greentown Labs</h3>
+                        <p class="mt-2 text-gray-600 flex-grow">We connected with North America's largest climatetech incubator to explore innovations and scale our solutions.</p>
+                        <a href="news.html" class="mt-4 inline-block text-growth-green font-semibold hover:underline">Read More &rarr;</a>
+                    </div>
                 </div>
             </div>
         </div>
-    </footer>
+    </section>
 
-    <script>
-        // Mobile menu toggle
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-    </script>
+    <section class="py-16 bg-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-center text-3xl font-bold text-brand-dark">Our Partners & Supporters</h2>
+            <div class="carousel-container mt-10">
+                <div class="carousel-track">
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Case+Western+Reserve+University+Veale+Institute+logo-1364346897.png" alt="Case Western Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Hult-Prize-logo-1-1598300507.png" alt="Hult Prize Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/CCHUB-logo-825881762.png" alt="CCHUB Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Ghana-Climate-Innovation-Centre-GCIC-3463433498.png" alt="GCIC Logo" class="h-12 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/KNUST-Logo-Vector.svg--467444582.png" alt="KNUST Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/cargill-logo-vector.svg" alt="Cargill Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Venture-Devils-Logo.png" alt="Venture Devils Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/United-Way-Logo.png" alt="United Way Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/MastercardFdn_Colour-POS-2044527937.png" alt="Mastercard Foundation Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Case+Western+Reserve+University+Veale+Institute+logo-1364346897.png" alt="Case Western Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Hult-Prize-logo-1-1598300507.png" alt="Hult Prize Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/CCHUB-logo-825881762.png" alt="CCHUB Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Ghana-Climate-Innovation-Centre-GCIC-3463433498.png" alt="GCIC Logo" class="h-12 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/KNUST-Logo-Vector.svg--467444582.png" alt="KNUST Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/cargill-logo-vector.svg" alt="Cargill Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/Venture-Devils-Logo.png" alt="Venture Devils Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/United-Way-Logo.png" alt="United Way Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                    <div class="w-[250px] flex-shrink-0 flex justify-center items-center p-4"><img src="images/MastercardFdn_Colour-POS-2044527937.png" alt="Mastercard Foundation Logo" class="h-16 grayscale hover:grayscale-0 transition duration-300"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-16 md:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-brand-dark">Our Team</h2>
+            <p class="mt-4 max-w-2xl mx-auto text-lg text-gray-600">Meet the passionate leaders driving our mission forward.</p>
+            <div class="mt-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+                <div><img src="images/IbrahimQuagraine.png" class="rounded-full mx-auto w-32 h-32 shadow-lg object-cover" alt="Ibrahim Quagraine"><h3 class="mt-4 font-bold text-lg text-brand-dark">Ibrahim Quagraine</h3><p class="text-growth-green">Chief Executive Officer</p></div>
+                <div><img src="images/PrinceHeadShot.png" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Prince Agyei Baffour"><h3 class="mt-4 font-bold text-lg text-brand-dark">Prince Agyei Baffour</h3><p class="text-growth-green">Chief Operations Officer</p></div>
+                <div><img src="images/itha_pro.png" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Ithabeleng Makhetha"><h3 class="mt-4 font-bold text-lg text-brand-dark">Ithabeleng Makhetha</h3><p class="text-growth-green">Chief Finance Officer</p></div>
+                <div><img src="images/thomas_new_pro.png" class="rounded-full mx-auto w-32 h-32 shadow-lg" alt="Thomas Tawiah-Baah"><h3 class="mt-4 font-bold text-lg text-brand-dark">Thomas Tawiah-Baah</h3><p class="text-growth-green">Chief Technology Officer</p></div>
+            </div>
+            <div class="mt-12">
+                <a href="about.html" class="inline-block bg-white text-growth-green font-semibold py-3 px-8 rounded-lg border border-gray-300 hover:bg-gray-100 transition-colors">Meet Our Full Team & Advisors</a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer id="contact" class="bg-brand-dark text-white">
+    <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="md:col-span-2">
+                <a href="index.html" class="flex items-center space-x-2">
+                    <img src="images/logo_white_large.png" alt="Cocoa Potash Logo" class="h-10 w-auto">
+                </a>
+                <p class="mt-4 text-gray-400 max-w-xs">Pioneering Africa's potash economy by transforming agricultural waste into sustainable wealth for farms and industries.</p>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold tracking-wider uppercase">Links</h3>
+                <ul class="mt-4 space-y-2">
+                    <li><a href="about.html" class="text-gray-400 hover:text-white">About Us</a></li>
+                    <li><a href="#products" class="text-gray-400 hover:text-white">Products</a></li>
+                    <li><a href="news.html" class="text-gray-400 hover:text-white">News</a></li>
+                    <li><a href="request-sample.html" class="text-gray-400 hover:text-white">Order Here</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-lg font-semibold tracking-wider uppercase">Get in Touch</h3>
+                <p class="mt-4 text-gray-400">Have a question or want to partner with us? We’d love to hear from you.</p>
+                <ul class="mt-4 space-y-2 text-gray-400">
+                    <li>Cocoa Potash Limited</li>
+                    <li>P. O. Box 23, Bekwai Ashanti Region</li>
+                    <li class="hover:text-white"><a href="mailto:info@cocoapotash.com">Email: info@cocoapotash.com</a></li>
+                    <li class="hover:text-white"><a href="tel:+23355704707">+233557848787</a> / <a href="tel:+233505554040">+233505554040</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-12 border-t border-gray-700 pt-8 flex flex-col sm:flex-row justify-between items-center">
+            <p class="text-gray-500">&copy; 2025 Cocoa Potash Limited. All Rights Reserved.</p>
+            <div class="flex space-x-6 mt-4 sm:mt-0">
+                
+                 <a href="https://www.linkedin.com/company/81955507" target="_blank" class="text-gray-400 hover:text-white">
+                   <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6S0 4.88 0 3.5 1.12 1 2.5 1s2.48 1.12 2.48 2.5zM.5 8h4V24h-4V8zm7.5 0h3.8v2.2h.1c.5-.95 1.75-2.2 3.6-2.2 3.85 0 4.6 2.5 4.6 5.8V24h-4v-8.6c0-2.05-.05-4.7-2.85-4.7-2.85 0-3.3 2.25-3.3 4.55V24h-4V8z" /></svg>
+                 </a>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu toggle (Existing function)
+    const mobileMenuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileMenuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // NEW: Click-to-swipe functionality for skincare products
+    function nextSlide(elementId, maxSlides, event) {
+        // Prevent the click from navigating the link
+        event.preventDefault(); 
+        
+        const container = document.getElementById(elementId);
+        const track = container.querySelector('.skincare-image-track');
+        const dotsContainer = container.querySelector('.image-dots');
+        
+        // Get current slide index (from data attribute)
+        let currentSlide = parseInt(container.getAttribute('data-current-slide'));
+        
+        // Calculate the next slide index, looping back to 0 if it exceeds maxSlides
+        let nextSlide = (currentSlide + 1) % maxSlides; 
+
+        // Calculate the width of one slide block (100 / maxSlides)
+        const slideWidthPercent = 100 / maxSlides; 
+        
+        // Calculate the new transform percentage.
+        const translateValue = -(nextSlide * slideWidthPercent); 
+        
+        // Apply the transform
+        track.style.transform = `translateX(${translateValue}%)`;
+        
+        // Update the data attribute for the next click
+        container.setAttribute('data-current-slide', nextSlide);
+
+        // --- Update Dots (New functionality) ---
+        if (dotsContainer) {
+            const dots = dotsContainer.querySelectorAll('.image-dot');
+            dots.forEach((dot, index) => {
+                dot.classList.remove('active');
+                if (index === nextSlide) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+        // ----------------------------------------
+    }
+</script>
 </body>
 </html>
